@@ -17,8 +17,5 @@ namespace AirportFinalProject.ViewModels
             flightViewModels = new ObservableCollection<FlightViewModel>();
             
         }
-
-       
-
     }
 }
