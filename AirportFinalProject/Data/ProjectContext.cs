@@ -42,6 +42,11 @@ namespace Airport.Data
                 new Company { CompanyId = "Ori", CompanyName = "Iberia", CompanyLogo = "Logo" });
             modelBuilder.Entity<Station>().HasData(
                 new Station { StationId = 1, StationName = "kaki" },
+                new Station { StationId = 2, StationName = "kaki" },
+                new Station { StationId = 3, StationName = "kaki" },
+                new Station { StationId = 4, StationName = "kaki" },
+                new Station { StationId = 5, StationName = "kaki" },
+                new Station { StationId = 6, StationName = "kaki" },
                 new Station { StationId = 7, StationName = "Pipi" }
                 );
         }

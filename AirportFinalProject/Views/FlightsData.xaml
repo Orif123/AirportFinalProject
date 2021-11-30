@@ -22,7 +22,11 @@
         <Button
                 HorizontalAlignment="Center"
                 Command="{Binding CreateFlight}"
-                Content="Create New Flight" Margin="0,78,0,-102" Grid.Row="1" />
+                Content="Create New Flight" Margin="0,164,0,-187" Grid.Row="1" />
+        <Button
+                HorizontalAlignment="Center"
+                Command="{Binding CreateRandomFlights, UpdateSourceTrigger=PropertyChanged}"
+                Content="Create New Flight" Margin="0,78,0,-0" Grid.Row="1" />
         <ListView ItemsSource="{Binding Flights}">
 
             <ListView.View>

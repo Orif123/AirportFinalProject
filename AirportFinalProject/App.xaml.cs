@@ -3,6 +3,7 @@ using AirportFinalProject.Services.Navigation;
 using AirportFinalProject.Stores;
 using AirportFinalProject.ViewModels;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Windows;
 
 namespace AirportFinalProject
@@ -12,11 +13,13 @@ namespace AirportFinalProject
     /// </summary>
     public partial class App : Application
     {
+        private readonly Random _random;
         private readonly NavigationStore _navigationStore;
         private  ProjectContext _context;
         public App()
         {
             _navigationStore = new NavigationStore();
+            _random = new Random();
         }
         protected override void OnStartup(StartupEventArgs e)
         {
@@ -33,7 +36,7 @@ namespace AirportFinalProject
         }
         private FlightDataViewModel createFlightViewModel()
         {
-            return new FlightDataViewModel( new NavigationService( _navigationStore, createFlightDataViewModel), _context);
+            return new FlightDataViewModel( new NavigationService( _navigationStore, createFlightDataViewModel), _context, _random);
         }
         private CreateFlightViewModel createFlightDataViewModel()
         {
