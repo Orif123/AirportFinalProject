@@ -19,7 +19,6 @@ namespace AirportFinalProject.Commands
         public override void Execute(object parameter)
         {
             var flights = _context.Flights.ToList();
-
         }
     }
 }

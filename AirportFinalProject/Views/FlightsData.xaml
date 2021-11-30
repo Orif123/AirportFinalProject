@@ -19,6 +19,10 @@
                 <ColumnDefinition Width="auto" />
             </Grid.ColumnDefinitions>
         </Grid>
+        <Button
+                HorizontalAlignment="Center"
+                Command="{Binding CreateFlight}"
+                Content="Create New Flight" Margin="0,78,0,-102" Grid.Row="1" />
         <ListView ItemsSource="{Binding Flights}">
 
             <ListView.View>
@@ -30,6 +34,7 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
+
 
                     <GridViewColumn Header="Flight Date">
                         <GridViewColumn.CellTemplate>

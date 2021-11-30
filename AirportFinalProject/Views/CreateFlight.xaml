@@ -18,7 +18,7 @@
 
         <TextBlock
             Grid.Row="0"
-            Text="Make Reservation" />
+            Text="Create Flight" />
 
         <Grid Grid.Row="1" Margin="0 25 0 0">
             <Grid.RowDefinitions>
@@ -49,10 +49,20 @@
                 Text="IsDeparture" />
             <CheckBox
                 Grid.Row="1"
+                Grid.Column="1"
+                Margin="75,5,-97,15"
+                IsChecked="{Binding IsDeparture, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBlock
+                Grid.Row="0"
+                Grid.Column="0"
+                Text="Start Date" />
+            <DatePicker
+                Grid.Row="1"
                 Grid.Column="0"
                 Margin="0 5 0 0"
-                IsChecked="{Binding IsDeparture, UpdateSourceTrigger=PropertyChanged}" />
+                SelectedDate="{Binding FlightDate, UpdateSourceTrigger=PropertyChanged}" />
             <Button Command="{Binding Submit}" Content="Submit" />
-        </Grid> 
+            <Button Command="{Binding FlightData}" Content="Go Back" Grid.Column="1" Margin="160,0,-262,35" Grid.RowSpan="2" />
+        </Grid>
     </Grid>
 </UserControl>
