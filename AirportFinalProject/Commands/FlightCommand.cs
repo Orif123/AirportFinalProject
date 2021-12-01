@@ -32,7 +32,7 @@ namespace AirportFinalProject.Commands
         }
         public override bool CanExecute(object parameter)
         {
-            return !String.IsNullOrEmpty(_createViewModel.CompanyId) &&  base.CanExecute(parameter);
+            return !String.IsNullOrEmpty(_createViewModel.CompanyId) && DateTime.Now <= _createViewModel.FlightDate && base.CanExecute(parameter);
         }
         public override void Execute(object parameter)
         {

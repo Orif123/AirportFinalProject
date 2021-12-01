@@ -4,14 +4,16 @@ using Airport.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AirportFinalProject.Migrations
 {
     [DbContext(typeof(ProjectContext))]
-    partial class ProjectContextModelSnapshot : ModelSnapshot
+    [Migration("20211201013638_another-updation")]
+    partial class anotherupdation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -60,7 +62,7 @@ namespace AirportFinalProject.Migrations
                     b.Property<bool>("IsDeparture")
                         .HasColumnType("bit");
 
-                    b.Property<int>("StationId")
+                    b.Property<int?>("StationId")
                         .HasColumnType("int");
 
                     b.HasKey("FlightId");
@@ -68,14 +70,15 @@ namespace AirportFinalProject.Migrations
                     b.HasIndex("CompanyId");
 
                     b.HasIndex("StationId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[StationId] IS NOT NULL");
 
                     b.ToTable("Flights");
                 });
 
             modelBuilder.Entity("Airport.Models.Station", b =>
                 {
-                    b.Property<int>("StationId")
+                    b.Property<int?>("StationId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -94,47 +97,37 @@ namespace AirportFinalProject.Migrations
                         new
                         {
                             StationId = 1,
-                            StationName = "Garage"
+                            StationName = "kaki"
                         },
                         new
                         {
                             StationId = 2,
-                            StationName = "Last Preperation"
+                            StationName = "Hara"
                         },
                         new
                         {
                             StationId = 3,
-                            StationName = "Terminal"
+                            StationName = "Shilshul"
                         },
                         new
                         {
                             StationId = 4,
-                            StationName = "Taking off"
+                            StationName = "Schnitzel"
                         },
                         new
                         {
                             StationId = 5,
-                            StationName = "Done"
+                            StationName = "Pitzel"
                         },
                         new
                         {
                             StationId = 6,
-                            StationName = "Landing"
+                            StationName = "Ori"
                         },
                         new
                         {
                             StationId = 7,
-                            StationName = "About to land"
-                        },
-                        new
-                        {
-                            StationId = 8,
-                            StationName = "preparing to land"
-                        },
-                        new
-                        {
-                            StationId = 9,
-                            StationName = "On Air"
+                            StationName = "Pipi"
                         });
                 });
 
@@ -146,9 +139,7 @@ namespace AirportFinalProject.Migrations
 
                     b.HasOne("Airport.Models.Station", "Station")
                         .WithOne("Flight")
-                        .HasForeignKey("Airport.Models.Flight", "StationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("Airport.Models.Flight", "StationId");
 
                     b.Navigation("Company");
 

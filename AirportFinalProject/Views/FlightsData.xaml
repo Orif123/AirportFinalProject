@@ -24,9 +24,18 @@
                 Command="{Binding CreateFlight}"
                 Content="Create New Flight" Margin="0,164,0,-187" Grid.Row="1" />
         <Button
+                HorizontalAlignment="Left"
+                Command="{Binding SeeArrivels}"
+                Content="See Arrivels" Margin="498,164,0,-187" Grid.Row="1" />
+        <Button
+                HorizontalAlignment="Left"
+                Command="{Binding SeeDepartures}"
+                Content="See Departures" Margin="240,159,0,-182" Grid.Row="1" />
+
+        <Button
                 HorizontalAlignment="Center"
                 Command="{Binding CreateRandomFlights, UpdateSourceTrigger=PropertyChanged}"
-                Content="Create New Flight" Margin="0,78,0,-0" Grid.Row="1" />
+                Content="Create Random Flights" Margin="0,78,0,-0" Grid.Row="1" />
         <ListView ItemsSource="{Binding Flights}">
 
             <ListView.View>
@@ -34,7 +43,7 @@
                     <GridViewColumn Header="Flight Number">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock HorizontalAlignment="Center" Text="{Binding FlightId}" />
+                                <TextBlock HorizontalAlignment="Center" Text="{Binding FlightDate}" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
@@ -48,7 +57,7 @@
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
 
-                    <!--<GridViewColumn Header="Company">
+                    <GridViewColumn Header="Company">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Padding="0 0 20 0" Text="{Binding CompanyName}" />
@@ -62,7 +71,7 @@
                                 <TextBlock Padding="0 0 20 0" Text="{Binding StationName}" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
-                    </GridViewColumn>-->
+                    </GridViewColumn>
                 </GridView>
             </ListView.View>
         </ListView>
