@@ -17,7 +17,6 @@ namespace AirportFinalProject
     public partial class App : Application
     {
         private const string CONNECTION_STRING = "Server=DESKTOP-EKQUKID;Database=AirportData;Trusted_Connection=True;";
-        private readonly Random _random;
         private readonly NavigationStore _navigationStore;
         private ProjectContext _context;
         private readonly IFlightProvider _provider;
@@ -26,10 +25,9 @@ namespace AirportFinalProject
         public App()
         {
             ContextFactory _factory = new ContextFactory(CONNECTION_STRING);
-            _provider = new FlightsProvider(_factory, createFlightViewModel());
+            _provider = new FlightsProvider(_factory);
              _creator = new FlightCreator(_factory, createFlightViewModel());
             _navigationStore = new NavigationStore();
-            _random = new Random();
         }
         protected override void OnStartup(StartupEventArgs e)
         {
@@ -48,7 +46,7 @@ namespace AirportFinalProject
         }
         private FlightDataViewModel createFlightViewModel()
         {
-            return new FlightDataViewModel(new NavigationService(_navigationStore, createFlightDataViewModel), _creator, _provider, _random, createFlightDataViewModel());
+            return new FlightDataViewModel(new NavigationService(_navigationStore, createFlightDataViewModel), _creator, _provider,  createFlightDataViewModel());
         }
         private CreateFlightViewModel createFlightDataViewModel()
         {

@@ -9,7 +9,7 @@ namespace AirportFinalProject.Services.FlightService.FlightsProvider
 {
     public interface IFlightProvider
     {
-       ObservableCollection<FlightViewModel> GetArrivals();
-        ObservableCollection<FlightViewModel> GetDepartures();
+       ObservableCollection<FlightViewModel> GetArrivals(FlightDataViewModel model);
+        ObservableCollection<FlightViewModel> GetDepartures(FlightDataViewModel model);
     }
 }

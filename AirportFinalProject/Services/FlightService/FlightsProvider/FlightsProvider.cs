@@ -14,31 +14,27 @@ namespace AirportFinalProject.Services.FlightService.FlightsProvider
     class FlightsProvider : IFlightProvider
     {
         private readonly ContextFactory _contextFactory;
-        private readonly FlightDataViewModel _flightViewModel;
-        public FlightsProvider(ContextFactory contextFactory, FlightDataViewModel flightViewModel)
+        public FlightsProvider(ContextFactory contextFactory)
         {
             _contextFactory = contextFactory;
-            _flightViewModel = flightViewModel;
         }
-        public ObservableCollection<FlightViewModel> GetArrivals()
+        public ObservableCollection<FlightViewModel> GetArrivals(FlightDataViewModel model)
         {
-            //using (ProjectContext _context = _contextFactory.CreateDBContext())
-            //{
-            //    //var list = _context.Flights.Where(a => a.IsDeparture == false).Include(p => p.Company).Include(p => p.Station);
-            //    //_flightViewModel.Arrivals.Clear();
-            //    //foreach (var flight in list)
-            //    //{
-            //    //    var viewModel = new FlightViewModel(flight);
-            //    //    _flightViewModel.Arrivals.Add(viewModel);
-            //    //}
-
-            //} 
-            return _flightViewModel.Arrivals;
+            using (ProjectContext _context = _contextFactory.CreateDBContext())
+            {
+                RandomGenerator.UpdateFlights(_context, model.Arrivals);
+                return model.Arrivals;
+            }
         }
 
-        public ObservableCollection <FlightViewModel> GetDepartures()
+        public ObservableCollection<FlightViewModel> GetDepartures(FlightDataViewModel model)
         {
-           return _flightViewModel.Departures;
+            using (ProjectContext _context = _contextFactory.CreateDBContext())
+            {
+                RandomGenerator.UpdateFlights(_context, model.Departures);
+                return model.Departures;
+            }
         }
+        
     }
 }

@@ -21,7 +21,7 @@ namespace AirportFinalProject.Services.FlightService
             _contextFactory = contextFactory;
             _flightDataViewModel = flightDataViewModel;
         }
-        public void CreateFlight(CreateFlightViewModel createViewModel )
+        public void CreateFlight(CreateFlightViewModel createViewModel)
         {
             using (ProjectContext _context = _contextFactory.CreateDBContext())
             {
@@ -53,14 +53,6 @@ namespace AirportFinalProject.Services.FlightService
                 }
                 _context.Flights.Add(flight);
                 _context.SaveChanges();
-                if (flight.IsDeparture)
-                {
-                    UpdateFlights(_context, _flightDataViewModel.Departures);
-                }
-                else if (!flight.IsDeparture)
-                {
-                    UpdateFlights(_context, _flightDataViewModel.Arrivals);
-                }
             }
         }
         private string GetFlyNumber(ProjectContext context, string flightId, string companyId)
@@ -77,48 +69,49 @@ namespace AirportFinalProject.Services.FlightService
             var flightId = Guid.NewGuid().ToString();
             return flightId;
         }
-        public void UpdateFlights(ProjectContext context, ObservableCollection<FlightViewModel> list)
-        {
-            var dataList = context.Flights.Where(a => a.IsDeparture).Include(p => p.Company).Include(p => p.Station);
-            list.Clear();
-            foreach (var flight in list)
-            {
-                list.Add(flight);
-            }
-        }
+
         private void Progress(ProjectContext context)
         {
-           
-                foreach (var flight in context.Flights)
+            RandomGenerator.UpdateFlights(context, _flightDataViewModel.Arrivals);
+            RandomGenerator.UpdateFlights(context, _flightDataViewModel.Departures);
+            foreach (var flight in context.Flights)
+            {
+                if (flight.IsDeparture)
                 {
-                    if (flight.IsDeparture)
+                    ++flight.StationId;
+                    if (flight.StationId > 5)
                     {
-                        ++flight.StationId;
-                        if (flight.StationId > 5)
-                        {
-                            context.Flights.Remove(flight);
-                            UpdateFlights(context, _flightDataViewModel.Departures);
-                        }
+                        context.Flights.Remove(flight);
                     }
-                    else if (!flight.IsDeparture)
+                }
+                else if (!flight.IsDeparture)
+                {
+
+                    --flight.StationId;
+                    if (flight.StationId < 5)
                     {
-
-                        --flight.StationId;
-                        if (flight.StationId < 5)
-                        {
-                            context.Flights.Remove(flight);
-                            UpdateFlights(context, _flightDataViewModel.Arrivals);
-
-                        }
+                        context.Flights.Remove(flight);
                     }
+                }
 
 
-                
+
             }
         }
     }
     public static class RandomGenerator
     {
+        public static void UpdateFlights(ProjectContext context, ObservableCollection<FlightViewModel> list)
+        {
+            list.Clear();
+            var dataList = context.Flights.Include(p => p.Company).Include(p => p.Station).ToList();
+            foreach (var flight in dataList)
+            {
+                var myList = new FlightViewModel(flight);
+                list.Add(myList);
+            }
+
+        }
         public static string GetCompanyId(ProjectContext context, Random rnd)
         {
             var index = rnd.Next(context.Companies.ToArray().Length);

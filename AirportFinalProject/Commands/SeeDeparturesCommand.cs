@@ -10,13 +10,15 @@ namespace AirportFinalProject.ViewModels
     internal class SeeDeparturesCommand : CommandBase
     {
         private readonly IFlightProvider _provider;
-        public SeeDeparturesCommand(IFlightProvider provider)
+        private readonly FlightDataViewModel _flightDataViewModel;
+        public SeeDeparturesCommand(IFlightProvider provider, FlightDataViewModel flightDataViewModel)
         {
+            _flightDataViewModel = flightDataViewModel;
             _provider = provider;
         }
         public override void Execute(object parameter)
         {
-            _provider.GetDepartures();
+            _provider.GetDepartures(_flightDataViewModel);
         }
     }
 }
