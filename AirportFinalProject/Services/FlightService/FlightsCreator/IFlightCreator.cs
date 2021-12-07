@@ -5,7 +5,7 @@ using System.Text;
 
 namespace AirportFinalProject.Services.FlightService
 {
-   public interface ICreateFlightService
+   public interface IFlightCreator
     {
         void CreateFlight(CreateFlightViewModel createViewModel);
     }

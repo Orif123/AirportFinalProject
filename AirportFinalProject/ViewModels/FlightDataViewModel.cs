@@ -1,5 +1,7 @@
 ﻿using Airport.Data;
 using AirportFinalProject.Commands;
+using AirportFinalProject.Services.FlightService;
+using AirportFinalProject.Services.FlightService.FlightsProvider;
 using AirportFinalProject.Services.Navigation;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -12,40 +14,30 @@ namespace AirportFinalProject.ViewModels
 {
     public class FlightDataViewModel : BaseViewModel
     {
-        
-        private  ProjectContext _projectContext;
+        private readonly IFlightCreator _creator;
+        private readonly IFlightProvider _provider;
+        private  CreateFlightViewModel _createFlightViewModel;
         private Random _random;
-        private  ObservableCollection<FlightViewModel> flightViewModels;
-        public ObservableCollection<FlightViewModel> Flights => flightViewModels;
+        public  ObservableCollection<FlightViewModel> Arrivals;
+        public ObservableCollection<FlightViewModel> Departures ;
         public ICommand CreateFlight { get;}
         public ICommand CreateRandomFlights { get;}
         public ICommand SeeDepartures { get;}
         public ICommand SeeArrivels { get;}
 
-        public FlightDataViewModel(NavigationService navigationService, ProjectContext projectContext, Random random)
+        public FlightDataViewModel(NavigationService navigationService, IFlightCreator creator, IFlightProvider provider, Random random, CreateFlightViewModel createFlightViewModel)
         {
-            _projectContext = projectContext;
+            _creator = creator;
+            _provider = provider;
+            _createFlightViewModel = createFlightViewModel;
             _random = random;
-            flightViewModels = new ObservableCollection<FlightViewModel>();
+            Departures = new ObservableCollection<FlightViewModel>();
+            Arrivals = new ObservableCollection<FlightViewModel>();
             CreateFlight = new NavigationCommand(navigationService);
-            CreateRandomFlights = new GenerateRandomFlightCommand(projectContext, _random, this);
-            SeeDepartures = new SeeDeparturesCommand(_projectContext, this);
-            SeeArrivels = new SeeArrivelsCommand(_projectContext, this);
+            CreateRandomFlights = new GenerateRandomFlightCommand(_creator, _createFlightViewModel);
+            SeeDepartures = new SeeDeparturesCommand(_provider);
+            SeeArrivels = new SeeArrivelsCommand(_provider);
           
         }
-
-        public void UpdateFlights()
-        {
-            var list = _projectContext.Flights.Where(a => a.IsDeparture).Include(p => p.Company).Include(p => p.Station);
-            flightViewModels.Clear();
-            foreach (var flight in list)
-            {
-                var viewModel = new FlightViewModel(flight);
-                flightViewModels.Add(viewModel);
-            }
-        }
-        
-           
-        
     }
 }
