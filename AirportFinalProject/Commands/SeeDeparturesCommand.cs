@@ -18,7 +18,7 @@ namespace AirportFinalProject.ViewModels
         }
         public override void Execute(object parameter)
         {
-            _provider.GetDepartures(_flightDataViewModel);
+            _provider.GetDepartures();
         }
     }
 }

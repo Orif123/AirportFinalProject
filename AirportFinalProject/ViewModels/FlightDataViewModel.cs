@@ -17,8 +17,8 @@ namespace AirportFinalProject.ViewModels
         private readonly IFlightCreator _creator;
         private readonly IFlightProvider _provider;
         private  CreateFlightViewModel _createFlightViewModel;
-        public ObservableCollection<FlightViewModel> Arrivals { get; set; }
-        public ObservableCollection<FlightViewModel> Departures { get; set; }
+        public ObservableCollection<FlightViewModel> Arrivals => _provider.GetArrivals();
+        public ObservableCollection<FlightViewModel> Departures => _provider.GetDepartures();
         public ICommand CreateFlight { get;}
         public ICommand CreateRandomFlights { get;}
         public ICommand SeeDepartures { get;}
@@ -29,13 +29,13 @@ namespace AirportFinalProject.ViewModels
             _creator = creator;
             _provider = provider;
             _createFlightViewModel = createFlightViewModel;
-            Departures = new ObservableCollection<FlightViewModel>();
-            Arrivals = new ObservableCollection<FlightViewModel>();
             CreateFlight = new NavigationCommand(navigationService);
             CreateRandomFlights = new GenerateRandomFlightCommand(_creator, _createFlightViewModel);
             SeeDepartures = new SeeDeparturesCommand(_provider, this);
             SeeArrivels = new SeeArrivelsCommand(_provider, this);
-          
+            
         }
+
+        
     }
 }

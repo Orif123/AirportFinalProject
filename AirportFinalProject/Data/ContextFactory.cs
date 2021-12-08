@@ -6,7 +6,7 @@ using System.Text;
 
 namespace AirportFinalProject.Data
 {
-    class ContextFactory
+    public class ContextFactory
     {
         private readonly string _connectionString;
         public ContextFactory(string connectionString)

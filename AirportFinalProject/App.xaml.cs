@@ -26,7 +26,7 @@ namespace AirportFinalProject
         {
             ContextFactory _factory = new ContextFactory(CONNECTION_STRING);
             _provider = new FlightsProvider(_factory);
-             _creator = new FlightCreator(_factory, createFlightViewModel());
+             _creator = new FlightCreator(_factory);
             _navigationStore = new NavigationStore();
         }
         protected override void OnStartup(StartupEventArgs e)

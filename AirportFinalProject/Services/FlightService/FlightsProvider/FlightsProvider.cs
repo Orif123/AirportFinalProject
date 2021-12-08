@@ -18,21 +18,21 @@ namespace AirportFinalProject.Services.FlightService.FlightsProvider
         {
             _contextFactory = contextFactory;
         }
-        public ObservableCollection<FlightViewModel> GetArrivals(FlightDataViewModel model)
+        public ObservableCollection<FlightViewModel> GetArrivals()
         {
             using (ProjectContext _context = _contextFactory.CreateDBContext())
             {
-                RandomGenerator.UpdateFlights(_context, model.Arrivals);
-                return model.Arrivals;
+                var list = RandomGenerator.UpdateFlights(_context, false);
+                return list;
             }
         }
 
-        public ObservableCollection<FlightViewModel> GetDepartures(FlightDataViewModel model)
+        public ObservableCollection<FlightViewModel> GetDepartures()
         {
             using (ProjectContext _context = _contextFactory.CreateDBContext())
             {
-                RandomGenerator.UpdateFlights(_context, model.Departures);
-                return model.Departures;
+                var list = RandomGenerator.UpdateFlights(_context, true);
+                return list;
             }
         }
         

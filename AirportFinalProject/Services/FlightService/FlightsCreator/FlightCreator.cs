@@ -1,6 +1,7 @@
 ﻿using Airport.Data;
 using Airport.Models;
 using AirportFinalProject.Data;
+using AirportFinalProject.Services.FlightService.FlightsProvider;
 using AirportFinalProject.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -11,15 +12,13 @@ using System.Text;
 
 namespace AirportFinalProject.Services.FlightService
 {
-    internal class FlightCreator : IFlightCreator
+    public class FlightCreator : IFlightCreator
 
     {
         private readonly ContextFactory _contextFactory;
-        private readonly FlightDataViewModel _flightDataViewModel;
-        public FlightCreator(ContextFactory contextFactory, FlightDataViewModel flightDataViewModel)
+        public FlightCreator(ContextFactory contextFactory)
         {
             _contextFactory = contextFactory;
-            _flightDataViewModel = flightDataViewModel;
         }
         public void CreateFlight(CreateFlightViewModel createViewModel)
         {
@@ -51,6 +50,7 @@ namespace AirportFinalProject.Services.FlightService
                 {
                     flight.StationId = 9;
                 }
+
                 _context.Flights.Add(flight);
                 _context.SaveChanges();
             }
@@ -72,8 +72,6 @@ namespace AirportFinalProject.Services.FlightService
 
         private void Progress(ProjectContext context)
         {
-            RandomGenerator.UpdateFlights(context, _flightDataViewModel.Arrivals);
-            RandomGenerator.UpdateFlights(context, _flightDataViewModel.Departures);
             foreach (var flight in context.Flights)
             {
                 if (flight.IsDeparture)
@@ -101,15 +99,17 @@ namespace AirportFinalProject.Services.FlightService
     }
     public static class RandomGenerator
     {
-        public static void UpdateFlights(ProjectContext context, ObservableCollection<FlightViewModel> list)
+        public static ObservableCollection<FlightViewModel> UpdateFlights(ProjectContext context, bool isDeparture)
         {
+            var list = new ObservableCollection<FlightViewModel>();
             list.Clear();
-            var dataList = context.Flights.Include(p => p.Company).Include(p => p.Station).ToList();
+            var dataList = context.Flights.Where(p=>p.IsDeparture == isDeparture).Include(p => p.Company).Include(p => p.Station).ToList();
             foreach (var flight in dataList)
             {
                 var myList = new FlightViewModel(flight);
                 list.Add(myList);
             }
+            return list;
 
         }
         public static string GetCompanyId(ProjectContext context, Random rnd)
