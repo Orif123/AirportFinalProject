@@ -36,7 +36,7 @@
                 HorizontalAlignment="Center"
                 Command="{Binding CreateRandomFlights, UpdateSourceTrigger=PropertyChanged}"
                 Content="Create Random Flights" Margin="0,78,0,-0" Grid.Row="1" />
-        <ListView ItemsSource="{Binding Arrivals}">
+        <ListView ItemsSource="{Binding Arrivels}">
 
             <ListView.View>
                 <GridView>

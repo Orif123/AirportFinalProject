@@ -37,24 +37,7 @@ namespace AirportFinalProject.Commands
         }
         public override void Execute(object parameter)
         {
-            //var flight = new Flight()
-            //{
-            //    FlightId = GetFlightId(),
-            //    FlightDate = _createViewModel.FlightDate,
-            //    CompanyId = _createViewModel.CompanyId,
-            //    IsDeparture = _createViewModel.IsDeparture,
-            //};
-            //flight.FlightNumber = GetFlyNumber(flight.FlightId, flight.CompanyId);
-            //if (flight.IsDeparture)
-            //{
-            //    flight.StationId = 1;
-            //}
-            //else if (!flight.IsDeparture)
-            //{
-            //    flight.StationId = 7;
-            //}
-            //_context.Flights.Add(flight);
-            //_context.SaveChanges();
+            
             _flightCreator.CreateFlight(_createViewModel);
             _navigationService.Navigate();
         }

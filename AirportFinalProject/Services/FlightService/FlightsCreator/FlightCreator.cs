@@ -35,7 +35,7 @@ namespace AirportFinalProject.Services.FlightService
                 };
                 if (createViewModel.CompanyId is null)
                 {
-                    Progress(_context);
+                    //Progress(_context);
                     flight.CompanyId = RandomGenerator.GetCompanyId(_context, _rnd);
                     flight.IsDeparture = RandomGenerator.IsDeparture(_rnd);
                     flight.FlightDate = DateTime.Now;
@@ -64,38 +64,13 @@ namespace AirportFinalProject.Services.FlightService
             var flyNumber = $"{name}-{flight}";
             return flyNumber;
         }
-        private string GetFlightId()
+        private static string GetFlightId()
         {
             var flightId = Guid.NewGuid().ToString();
             return flightId;
         }
 
-        private void Progress(ProjectContext context)
-        {
-            foreach (var flight in context.Flights)
-            {
-                if (flight.IsDeparture)
-                {
-                    ++flight.StationId;
-                    if (flight.StationId > 5)
-                    {
-                        context.Flights.Remove(flight);
-                    }
-                }
-                else if (!flight.IsDeparture)
-                {
-
-                    --flight.StationId;
-                    if (flight.StationId < 5)
-                    {
-                        context.Flights.Remove(flight);
-                    }
-                }
-
-
-
-            }
-        }
+       
     }
     public static class RandomGenerator
     {

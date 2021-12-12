@@ -28,7 +28,7 @@ namespace AirportFinalProject.ViewModels
 
         private void Dt_Tick(object sender, EventArgs e)
         {
-            _flightDataViewModel.Arrivals.CollectionChanged += Arrivals_CollectionChanged;
+            _flightDataViewModel.Arrivels.CollectionChanged += Arrivals_CollectionChanged;
         }
 
         private void Arrivals_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
