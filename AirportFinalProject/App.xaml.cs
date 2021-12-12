@@ -1,4 +1,6 @@
 ﻿using Airport.Data;
+using AirportFinalProject.Services.Flight.Creator;
+using AirportFinalProject.Services.FlightCreator;
 using AirportFinalProject.Services.Navigation;
 using AirportFinalProject.Stores;
 using AirportFinalProject.ViewModels;
@@ -13,11 +15,16 @@ namespace AirportFinalProject
     /// </summary>
     public partial class App : Application
     {
+        private const string CONNECTION_STRING = "Server=DESKTOP-EKQUKID;Database=AirportData;Trusted_Connection=True;";
+        public static  ContextFactory _factory;
         private readonly Random _random;
         private readonly NavigationStore _navigationStore;
-        private  ProjectContext _context;
+        private ProjectContext _context;
+        private readonly IFlightCreator _creator;
         public App()
         {
+            _factory = new ContextFactory(CONNECTION_STRING);
+            _creator = new FlightCreator(_factory);
             _navigationStore = new NavigationStore();
             _random = new Random();
         }
@@ -36,11 +43,11 @@ namespace AirportFinalProject
         }
         private FlightDataViewModel createFlightViewModel()
         {
-            return new FlightDataViewModel( new NavigationService( _navigationStore, createFlightDataViewModel), _context, _random);
+            return new FlightDataViewModel( new NavigationService( _navigationStore, createFlightDataViewModel), _random);
         }
         private CreateFlightViewModel createFlightDataViewModel()
         {
-            return new CreateFlightViewModel(_context, new NavigationService (_navigationStore, createFlightViewModel));
+            return new CreateFlightViewModel(_creator, new NavigationService (_navigationStore, createFlightViewModel));
         }
     }
 }

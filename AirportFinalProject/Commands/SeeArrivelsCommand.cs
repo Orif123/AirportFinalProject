@@ -1,5 +1,6 @@
 ﻿using Airport.Data;
 using AirportFinalProject.Commands;
+using AirportFinalProject.Services.Flight.Creator;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Windows.Input;
@@ -8,21 +9,24 @@ namespace AirportFinalProject.ViewModels
 {
     public class SeeArrivelsCommand : CommandBase
     {
-        private readonly ProjectContext _projectContext;
+        private readonly ContextFactory _factory;
         private readonly FlightDataViewModel _flightViewModels;
-        public SeeArrivelsCommand(ProjectContext projectContext, FlightDataViewModel flightViewModel)
+        public SeeArrivelsCommand(ContextFactory factory, FlightDataViewModel flightViewModel)
         {
-            _projectContext = projectContext;
+            _factory = factory;
             _flightViewModels = flightViewModel;
         }
         public override void Execute(object parameter)
         {
-            var list = _projectContext.Flights.Where(a => a.IsDeparture == false).Include(p => p.Company).Include(p => p.Station);
-            _flightViewModels.Flights.Clear();
-            foreach (var flight in list)
+            using (ProjectContext _projectContext = _factory.CreateDBContext())
             {
-                var viewModel = new FlightViewModel(flight);
-                _flightViewModels.Flights.Add(viewModel);
+                var list = _projectContext.Flights.Where(a => a.IsDeparture == false).Include(p => p.Company).Include(p => p.Station);
+                _flightViewModels.Flights.Clear();
+                foreach (var flight in list)
+                {
+                    var viewModel = new FlightViewModel(flight);
+                    _flightViewModels.Flights.Add(viewModel);
+                }
             }
         }
     }

@@ -1,5 +1,6 @@
 ﻿using Airport.Data;
 using AirportFinalProject.Commands;
+using AirportFinalProject.Services.FlightCreator;
 using AirportFinalProject.Services.Navigation;
 using AirportFinalProject.Stores;
 using AirportFinalProject.ViewModels;
@@ -10,17 +11,17 @@ namespace AirportFinalProject.ViewModels
 {
     public class CreateFlightViewModel : BaseViewModel
     {
-        private readonly ProjectContext _context;
-       
-        public CreateFlightViewModel(ProjectContext context, NavigationService navigationService)
+        private readonly IFlightCreator _flightCreator;
+
+
+        public CreateFlightViewModel(IFlightCreator flightCreator, NavigationService navigationService)
         {
-           
-            _context = context;
-            Submit = new FlightCommand(_context, this, navigationService);
+            _flightCreator = flightCreator;
+            Submit = new FlightCommand(_flightCreator, this, navigationService);
             FlightData = new NavigationCommand(navigationService);
         }
-        public ICommand Submit { get;}
-        public ICommand FlightData { get;}
+        public ICommand Submit { get; }
+        public ICommand FlightData { get; }
         private string _companyId;
         public string CompanyId
         {
@@ -38,7 +39,7 @@ namespace AirportFinalProject.ViewModels
             get { return _flightDate; }
             set
             {
-                _flightDate = value;
+                _flightDate = (DateTime)value;
                 OnPropertyChanged(nameof(FlightDate));
             }
 
@@ -55,6 +56,5 @@ namespace AirportFinalProject.ViewModels
             }
 
         }
-
     }
 }

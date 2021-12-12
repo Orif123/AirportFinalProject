@@ -1,5 +1,6 @@
 ﻿using Airport.Data;
 using Airport.Models;
+using AirportFinalProject.Services.FlightCreator;
 using AirportFinalProject.Services.Navigation;
 using AirportFinalProject.ViewModels;
 using System;
@@ -12,12 +13,12 @@ namespace AirportFinalProject.Commands
 {
     class FlightCommand : CommandBase
     {
-        private readonly ProjectContext _context;
+        private readonly IFlightCreator _flightCreator;
         private readonly CreateFlightViewModel _createViewModel;
         private readonly NavigationService _navigationService;
-        public FlightCommand(ProjectContext context, CreateFlightViewModel createFlightViewModel, NavigationService navigationService)
+        public FlightCommand(IFlightCreator flightCreator, CreateFlightViewModel createFlightViewModel, NavigationService navigationService)
         {
-            _context = context;
+            _flightCreator = flightCreator;
             _createViewModel = createFlightViewModel;
             _navigationService = navigationService;
             _createViewModel.PropertyChanged += ViewModelPropertyChanged;
@@ -36,38 +37,9 @@ namespace AirportFinalProject.Commands
         }
         public override void Execute(object parameter)
         {
-            var flight = new Flight()
-            {
-                FlightId = GetFlightId(),
-                FlightDate = _createViewModel.FlightDate,
-                CompanyId = _createViewModel.CompanyId,
-                IsDeparture = _createViewModel.IsDeparture,
-            };
-            flight.FlightNumber = GetFlyNumber(flight.FlightId, flight.CompanyId);
-            if (flight.IsDeparture)
-            {
-                flight.StationId = 1;
-            }
-            else if (!flight.IsDeparture)
-            {
-                flight.StationId = 7;
-            }
-            _context.Flights.Add(flight);
-            _context.SaveChanges();
+
+            _flightCreator.CreateFlight(_createViewModel);
             _navigationService.Navigate();
-        }
-        protected string GetFlyNumber(string flightId, string companyId)
-        {
-            var company = _context.Companies.SingleOrDefault(c => c.CompanyId == companyId);
-            var name = company.CompanyName.ToUpper().Substring(0, 3);
-            var flight = flightId.Substring(0, 4);
-            var flyNumber = $"{name}-{flight}";
-            return flyNumber;
-        }
-        private string GetFlightId()
-        {
-            var flightId = Guid.NewGuid().ToString();
-            return flightId;
         }
     }
 }
