@@ -33,7 +33,7 @@ namespace AirportFinalProject
             base.OnStartup(e);
             DbContextOptions options = new DbContextOptionsBuilder().UseSqlServer("Server=DESKTOP-EKQUKID;Database=AirportData;Trusted_Connection=True;").Options;
             _context = new ProjectContext(options);
-            _navigationStore.BaseViewModel = createFlightDataViewModel();
+            _navigationStore.BaseViewModel = createSimulatorViewModel();
             _context.Database.Migrate();
             MainWindow = new MainWindow()
             {
@@ -41,13 +41,14 @@ namespace AirportFinalProject
             };
             MainWindow.Show();
         }
-        private FlightDataViewModel createFlightViewModel()
+        private SimulatorViewModel createFlightViewModel()
         {
-            return new FlightDataViewModel( new NavigationService( _navigationStore, createFlightDataViewModel), _random);
+            return new SimulatorViewModel( new NavigationService(_navigationStore, this.createSimulatorViewModel), _random);
         }
-        private CreateFlightViewModel createFlightDataViewModel()
+        private CreateFlightViewModel createSimulatorViewModel()
         {
             return new CreateFlightViewModel(_creator, new NavigationService (_navigationStore, createFlightViewModel));
         }
+        
     }
 }

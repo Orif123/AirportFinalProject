@@ -5,7 +5,7 @@ using System.Windows.Input;
 
 namespace AirportFinalProject.Commands
 {
-    public abstract class CommandBase : ICommand
+    public abstract class BaseCommand : ICommand
     {
         public event EventHandler CanExecuteChanged;
 

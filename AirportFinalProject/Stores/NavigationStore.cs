@@ -17,7 +17,6 @@ namespace AirportFinalProject.Stores
                 _baseViewModel = value;
                 OnCurrentViewModelChanged();
             }
-            
         }
         private void OnCurrentViewModelChanged()
         {

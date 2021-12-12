@@ -1,6 +1,7 @@
 ﻿using Airport.Data;
 using AirportFinalProject.Commands;
 using AirportFinalProject.Services.Flight.Creator;
+using AirportFinalProject.Services.FlightProvider;
 using AirportFinalProject.Services.Navigation;
 using AirportFinalProject.Simulator;
 using Microsoft.EntityFrameworkCore;
@@ -12,29 +13,29 @@ using System.Windows.Input;
 
 namespace AirportFinalProject.ViewModels
 {
-    public class FlightDataViewModel : BaseViewModel
+    public class SimulatorViewModel : BaseViewModel
     {
         private readonly ISimulation _simulation;
-        private Random _random;
-        private  ObservableCollection<FlightViewModel> flightViewModels;
-        public ObservableCollection<FlightViewModel> Flights => flightViewModels;
-        public ICommand CreateFlight { get;}
-        public ICommand CreateRandomFlights { get;}
-        public ICommand SeeDepartures { get;}
-        public ICommand SeeArrivels { get;}
-
-        public FlightDataViewModel(NavigationService navigationService, Random random)
+        private readonly IFlightProvider _provider;
+        public SimulatorViewModel(NavigationService navigationService, Random random)
         {
-           
             _random = random;
-            _simulation = new Simulation(App._factory, _random , this);
+            _simulation = new Simulation(App._factory, _random, this);
+            _provider = new FlightProvider(App._factory, this);
             flightViewModels = new ObservableCollection<FlightViewModel>();
             CreateFlight = new NavigationCommand(navigationService);
             CreateRandomFlights = new GenerateRandomFlightCommand(_simulation);
-            SeeDepartures = new SeeDeparturesCommand(App._factory, this);
-            SeeArrivels = new SeeArrivelsCommand(App._factory, this);
-          
+            SeeDepartures = new SeeDeparturesCommand(_provider);
+            SeeArrivels = new SeeArrivelsCommand(_provider);
         }
+        private Random _random;
+        private ObservableCollection<FlightViewModel> flightViewModels;
+        public ObservableCollection<FlightViewModel> Flights => flightViewModels;
+        public ICommand CreateFlight { get; }
+        public ICommand CreateRandomFlights { get; }
+        public ICommand SeeDepartures { get; }
+        public ICommand SeeArrivels { get; }
+
 
         public void UpdateFlights()
         {

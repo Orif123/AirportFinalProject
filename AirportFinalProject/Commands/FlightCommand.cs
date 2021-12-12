@@ -11,7 +11,7 @@ using System.Text;
 
 namespace AirportFinalProject.Commands
 {
-    class FlightCommand : CommandBase
+    class FlightCommand : BaseCommand
     {
         private readonly IFlightCreator _flightCreator;
         private readonly CreateFlightViewModel _createViewModel;

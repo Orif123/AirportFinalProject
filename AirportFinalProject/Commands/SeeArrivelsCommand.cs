@@ -1,33 +1,24 @@
 ﻿using Airport.Data;
 using AirportFinalProject.Commands;
 using AirportFinalProject.Services.Flight.Creator;
+using AirportFinalProject.Services.FlightProvider;
+using AirportFinalProject.Services.Navigation;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Windows.Input;
 
 namespace AirportFinalProject.ViewModels
 {
-    public class SeeArrivelsCommand : CommandBase
+    public class SeeArrivelsCommand : BaseCommand
     {
-        private readonly ContextFactory _factory;
-        private readonly FlightDataViewModel _flightViewModels;
-        public SeeArrivelsCommand(ContextFactory factory, FlightDataViewModel flightViewModel)
+        private readonly IFlightProvider _provider;
+        public SeeArrivelsCommand(IFlightProvider provider)
         {
-            _factory = factory;
-            _flightViewModels = flightViewModel;
+            _provider = provider;
         }
         public override void Execute(object parameter)
         {
-            using (ProjectContext _projectContext = _factory.CreateDBContext())
-            {
-                var list = _projectContext.Flights.Where(a => a.IsDeparture == false).Include(p => p.Company).Include(p => p.Station);
-                _flightViewModels.Flights.Clear();
-                foreach (var flight in list)
-                {
-                    var viewModel = new FlightViewModel(flight);
-                    _flightViewModels.Flights.Add(viewModel);
-                }
-            }
+            _provider.LoadArrivels();
         }
     }
 }

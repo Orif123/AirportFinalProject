@@ -14,8 +14,8 @@ namespace AirportFinalProject.Simulator
     {
         private ContextFactory _factory;
         private Random _rnd;
-        private readonly FlightDataViewModel _flightDataViewModel;
-        public Simulation(ContextFactory factory, Random rnd, FlightDataViewModel flightDataViewModel)
+        private readonly ViewModels.SimulatorViewModel _flightDataViewModel;
+        public Simulation(ContextFactory factory, Random rnd, ViewModels.SimulatorViewModel flightDataViewModel)
         {
             _flightDataViewModel = flightDataViewModel;
             _factory = factory;

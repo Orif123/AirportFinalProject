@@ -8,7 +8,7 @@ using System.Text;
 
 namespace AirportFinalProject.Commands
 {
-    class NavigationCommand : CommandBase
+    class NavigationCommand : BaseCommand
     {
         
         private readonly NavigationService _navigationService;
