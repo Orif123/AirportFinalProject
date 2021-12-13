@@ -3,9 +3,7 @@ using Airport.Models;
 using AirportFinalProject.Services.Flight.Creator;
 using AirportFinalProject.ViewModels;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Windows.Threading;
 
 namespace AirportFinalProject.Simulator
@@ -14,7 +12,8 @@ namespace AirportFinalProject.Simulator
     {
         private ContextFactory _factory;
         private Random _rnd;
-        private readonly ViewModels.SimulatorViewModel _flightDataViewModel;
+        private readonly SimulatorViewModel _flightDataViewModel;
+
         public Simulation(ContextFactory factory, Random rnd, ViewModels.SimulatorViewModel flightDataViewModel)
         {
             _flightDataViewModel = flightDataViewModel;
@@ -56,7 +55,6 @@ namespace AirportFinalProject.Simulator
                 _flightDataViewModel.UpdateFlights();
             }
         }
-
         private string GetCompanyId(ProjectContext context)
         {
             var index = _rnd.Next(context.Companies.ToArray().Length);

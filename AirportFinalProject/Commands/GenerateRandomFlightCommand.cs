@@ -1,5 +1,6 @@
 ﻿using Airport.Data;
 using Airport.Models;
+using AirportFinalProject.Services.FlightProvider;
 using AirportFinalProject.Simulator;
 using AirportFinalProject.ViewModels;
 using System;
@@ -14,10 +15,10 @@ namespace AirportFinalProject.Commands
     class GenerateRandomFlightCommand : BaseCommand
     {
         private readonly ISimulation _simulation;
-
         public GenerateRandomFlightCommand(ISimulation simulation)
         {
             _simulation = simulation;
+           
         }
         public override void Execute(object parameter)
         {
