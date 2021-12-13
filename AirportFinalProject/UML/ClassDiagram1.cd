@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="AirportFinalProject.Commands.FlightCommand" Collapsed="true">
+    <Position X="6.25" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAAAQAIEAAAAKAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Commands\FlightCommand.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AirportFinalProject.Commands.GenerateRandomFlightCommand" Collapsed="true">
+    <Position X="8" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Commands\GenerateRandomFlightCommand.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AirportFinalProject.Commands.NavigationCommand" Collapsed="true">
+    <Position X="4.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAIAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Commands\NavigationCommand.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AirportFinalProject.Commands.BaseCommand" Collapsed="true">
+    <Position X="6.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAAQAAEAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Shared\BaseCommand.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

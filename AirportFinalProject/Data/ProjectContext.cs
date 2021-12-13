@@ -39,7 +39,10 @@ namespace Airport.Data
                 .HasMany(p => p.Flights)
                 .WithOne(c => c.Company);
             modelBuilder.Entity<Company>().HasData(
-                new Company { CompanyId = "Ori", CompanyName = "Iberia", CompanyLogo = "Logo" });
+                new Company { CompanyId = "Ori", CompanyName = "Iberia", CompanyLogo = "Logo" },
+                new Company { CompanyId = "ELA", CompanyName = "ElAl", CompanyLogo = "Logo" },
+                new Company { CompanyId = "LUF", CompanyName = "Lufthansa", CompanyLogo = "Logo" }
+                );
             modelBuilder.Entity<Station>().HasData(
                 new Station { StationId = 1, StationName = "Garage" },
                 new Station { StationId = 2, StationName = "Last Preperation"},
