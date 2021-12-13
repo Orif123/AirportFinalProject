@@ -2,7 +2,7 @@
 
 namespace AirportFinalProject.Migrations
 {
-    public partial class anotherupdation : Migration
+    public partial class stationnull : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

@@ -60,7 +60,7 @@ namespace AirportFinalProject.Migrations
                     b.Property<bool>("IsDeparture")
                         .HasColumnType("bit");
 
-                    b.Property<int>("StationId")
+                    b.Property<int?>("StationId")
                         .HasColumnType("int");
 
                     b.HasKey("FlightId");
@@ -68,7 +68,8 @@ namespace AirportFinalProject.Migrations
                     b.HasIndex("CompanyId");
 
                     b.HasIndex("StationId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[StationId] IS NOT NULL");
 
                     b.ToTable("Flights");
                 });
@@ -146,9 +147,7 @@ namespace AirportFinalProject.Migrations
 
                     b.HasOne("Airport.Models.Station", "Station")
                         .WithOne("Flight")
-                        .HasForeignKey("Airport.Models.Flight", "StationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("Airport.Models.Flight", "StationId");
 
                     b.Navigation("Company");
 
