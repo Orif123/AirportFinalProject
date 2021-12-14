@@ -1,20 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="AirportFinalProject.Commands.FlightCommand" Collapsed="true">
+  <Class Name="AirportFinalProject.Commands.FlightCommand">
     <Position X="6.25" Y="1.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>QAAAAAAAAAAAAAQAIEAAAAKAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Commands\FlightCommand.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="AirportFinalProject.Commands.GenerateRandomFlightCommand" Collapsed="true">
+  <Class Name="AirportFinalProject.Commands.GenerateRandomFlightCommand">
     <Position X="8" Y="1.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAQAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Commands\GenerateRandomFlightCommand.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="AirportFinalProject.Commands.NavigationCommand" Collapsed="true">
+  <Class Name="AirportFinalProject.Commands.NavigationCommand">
     <Position X="4.5" Y="1.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAQAIAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>

@@ -7,6 +7,7 @@ using AirportFinalProject.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace AirportFinalProject
 {
@@ -43,11 +44,15 @@ namespace AirportFinalProject
         }
         private SimulatorViewModel createFlightViewModel()
         {
-            return new SimulatorViewModel( new NavigationService(_navigationStore, this.createSimulatorViewModel), _random);
+            return new SimulatorViewModel( new NavigationService(_navigationStore, createSimulatorViewModel, createVisualizer), _random);
         }
         private CreateFlightViewModel createSimulatorViewModel()
         {
-            return new CreateFlightViewModel(_creator, new NavigationService (_navigationStore, createFlightViewModel));
+            return new CreateFlightViewModel(_creator, new NavigationService (_navigationStore, createFlightViewModel, createVisualizer));
+        }
+        private VisualizerViewModel createVisualizer()
+        {
+            return new VisualizerViewModel(new NavigationService(_navigationStore, createSimulatorViewModel, createVisualizer));
         }
         
     }

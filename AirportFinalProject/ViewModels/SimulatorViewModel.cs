@@ -14,6 +14,7 @@ namespace AirportFinalProject.ViewModels
     public class SimulatorViewModel : BaseViewModel
     {
         private readonly ISimulation _simulation;
+        private readonly VisualizerViewModel _visualizerViewModel;
         public SimulatorViewModel(NavigationService navigationService, Random random)
         {
             _random = random;
@@ -22,7 +23,9 @@ namespace AirportFinalProject.ViewModels
             Flights = CollectionViewSource.GetDefaultView(UpdateFlights());
             Flights.SortDescriptions.Add(new SortDescription(nameof(FlightViewModel.FlightDate), ListSortDirection.Ascending));
             Flights.Filter = FilterFlights;
+            _visualizerViewModel = new VisualizerViewModel(navigationService);
             CreateFlight = new NavigationCommand(navigationService);
+            SeeVisualizer = new NavigateToVisualizerCommand(navigationService, _visualizerViewModel);
             CreateRandomFlights = new GenerateRandomFlightCommand(_simulation);
         }
 
@@ -44,9 +47,8 @@ namespace AirportFinalProject.ViewModels
         public ICollectionView Flights { get; }
         public ICommand CreateFlight { get; }
         public ICommand CreateRandomFlights { get; }
-        public ICommand SeeDepartures { get; }
-        public ICommand SeeArrivels { get; }
-
+        public ICommand SeeVisualizer { get; }
+       
 
         public ObservableCollection<FlightViewModel> UpdateFlights()
         {

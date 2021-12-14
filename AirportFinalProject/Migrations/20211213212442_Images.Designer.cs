@@ -4,14 +4,16 @@ using Airport.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AirportFinalProject.Migrations
 {
     [DbContext(typeof(ProjectContext))]
-    partial class ProjectContextModelSnapshot : ModelSnapshot
+    [Migration("20211213212442_Images")]
+    partial class Images
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -23,9 +25,6 @@ namespace AirportFinalProject.Migrations
                 {
                     b.Property<string>("CompanyId")
                         .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("AirplanePath")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CompanyLogo")
                         .HasColumnType("nvarchar(max)");
@@ -41,21 +40,18 @@ namespace AirportFinalProject.Migrations
                         new
                         {
                             CompanyId = "Ori",
-                            AirplanePath = "C:/Users/ZEN/source/repos/AirportFinalProject/AirportFinalProject/Assets/Iberia.jfif",
                             CompanyLogo = "C:/Users/ZEN/source/repos/AirportFinalProject/AirportFinalProject/Assets/Iberia.jfif",
                             CompanyName = "Iberia"
                         },
                         new
                         {
                             CompanyId = "ELA",
-                            AirplanePath = "C:/Users/ZEN/source/repos/AirportFinalProject/AirportFinalProject/Assets/Iberia.jfif",
                             CompanyLogo = "C:/Users/ZEN/source/repos/AirportFinalProject/AirportFinalProject/Assets/EL AL.jpg",
                             CompanyName = "ElAl"
                         },
                         new
                         {
-                            CompanyId = "luf",
-                            AirplanePath = "C:/Users/ZEN/source/repos/AirportFinalProject/AirportFinalProject/Assets/Iberia.jfif",
+                            CompanyId = "LUF",
                             CompanyLogo = "C:/Users/ZEN/source/repos/AirportFinalProject/AirportFinalProject/Assets/Lufthansa.png",
                             CompanyName = "Lufthansa"
                         });
@@ -77,6 +73,9 @@ namespace AirportFinalProject.Migrations
 
                     b.Property<bool>("IsDeparture")
                         .HasColumnType("bit");
+
+                    b.Property<string>("PhotoPath")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("StationId")
                         .HasColumnType("int");
@@ -116,55 +115,46 @@ namespace AirportFinalProject.Migrations
                         new
                         {
                             StationId = 1,
-                            PhotoPath = "C:/Users/ZEN/source/repos/AirportFinalProject/AirportFinalProject/Assets/Iberia.jfif",
                             StationName = "Garage"
                         },
                         new
                         {
                             StationId = 2,
-                            PhotoPath = "C:/Users/ZEN/source/repos/AirportFinalProject/AirportFinalProject/Assets/Iberia.jfif",
                             StationName = "Last Preperation"
                         },
                         new
                         {
                             StationId = 3,
-                            PhotoPath = "C:/Users/ZEN/source/repos/AirportFinalProject/AirportFinalProject/Assets/Iberia.jfif",
                             StationName = "Terminal"
                         },
                         new
                         {
                             StationId = 4,
-                            PhotoPath = "C:/Users/ZEN/source/repos/AirportFinalProject/AirportFinalProject/Assets/Iberia.jfif",
                             StationName = "Taking off"
                         },
                         new
                         {
                             StationId = 5,
-                            PhotoPath = "C:/Users/ZEN/source/repos/AirportFinalProject/AirportFinalProject/Assets/Iberia.jfif",
                             StationName = "Done"
                         },
                         new
                         {
                             StationId = 6,
-                            PhotoPath = "C:/Users/ZEN/source/repos/AirportFinalProject/AirportFinalProject/Assets/Iberia.jfif",
                             StationName = "Landing"
                         },
                         new
                         {
                             StationId = 7,
-                            PhotoPath = "C:/Users/ZEN/source/repos/AirportFinalProject/AirportFinalProject/Assets/Iberia.jfif",
                             StationName = "About to land"
                         },
                         new
                         {
                             StationId = 8,
-                            PhotoPath = "C:/Users/ZEN/source/repos/AirportFinalProject/AirportFinalProject/Assets/Iberia.jfif",
                             StationName = "preparing to land"
                         },
                         new
                         {
                             StationId = 9,
-                            PhotoPath = "C:/Users/ZEN/source/repos/AirportFinalProject/AirportFinalProject/Assets/Iberia.jfif",
                             StationName = "On Air"
                         });
                 });

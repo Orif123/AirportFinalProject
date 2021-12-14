@@ -8,7 +8,6 @@ namespace AirportFinalProject.ViewModels
 {
     public class MainViewModel: BaseViewModel
     {
-        private readonly ProjectContext _context;
         private readonly NavigationStore _navigation;
         public BaseViewModel CurrentViewModel => _navigation.BaseViewModel;
         public MainViewModel(NavigationStore navigationStore)

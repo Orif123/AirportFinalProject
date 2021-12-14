@@ -9,5 +9,7 @@ namespace Airport.Models
         [ForeignKey("FlightId")]
         public Flight Flight { get; set; }
         public string FlightId { get; set; }
+        public string  PhotoPath { get; set; }
+
     }
 }

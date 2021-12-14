@@ -12,7 +12,7 @@ namespace Airport.Models
         public DateTime FlightDate { get; set; }
         public bool IsDeparture { get; set; }
         [ForeignKey("StationId")]
-        public Station? Station { get; set; }
+        public Station Station { get; set; }
         public int? StationId { get; set; }
         [ForeignKey("CompanyId")]
         public Company Company { get; set; }

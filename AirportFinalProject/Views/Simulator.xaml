@@ -26,6 +26,10 @@
                 HorizontalAlignment="Left"
                 Command="{Binding CreateFlight}"
                 Content="Create New Flight" Margin="451,78,0,0" Grid.Row="1" RenderTransformOrigin="1.11,0.578" />
+        <Button
+                HorizontalAlignment="Left"
+                Command="{Binding SeeVisualizer}"
+                Content="See Airport" Margin="654,78,0,0" Grid.Row="1" RenderTransformOrigin="1.11,0.578" />
         <ComboBox Margin="200,130,251,-56" Grid.Row="1" SelectedValue="{Binding FlightFilter}" SelectedValuePath="Content">
             <ComboBoxItem>Arrivels</ComboBoxItem>
             <ComboBoxItem>Departures</ComboBoxItem>
@@ -68,7 +72,7 @@
                     <GridViewColumn Header="Company">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Padding="0 0 20 0" Text="{Binding CompanyName}" />
+                                <Image Height="33" Width="70" Source="{Binding CompanyName}" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
