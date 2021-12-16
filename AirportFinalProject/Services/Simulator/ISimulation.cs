@@ -4,7 +4,7 @@ using System.Text;
 
 namespace AirportFinalProject.Simulator
 {
-    interface ISimulation
+    public interface ISimulation
     {
         void RandomFlightSimulation();
     }

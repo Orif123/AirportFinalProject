@@ -18,8 +18,6 @@ namespace AirportFinalProject.Commands
         public override void Execute(object parameter)
         {
             _navigationService.SeeVisualizer();
-            _visualizerViewModel.InitializeStations();
-            _visualizerViewModel.InitializePlans();
         }
     }
 }

@@ -13,9 +13,12 @@ namespace AirportFinalProject.Simulator
         private ContextFactory _factory;
         private Random _rnd;
         private readonly SimulatorViewModel _flightDataViewModel;
+        private readonly VisualizerViewModel _visualizerViewModel;
 
-        public Simulation(ContextFactory factory, Random rnd, ViewModels.SimulatorViewModel flightDataViewModel)
+
+        public Simulation(ContextFactory factory, Random rnd, ViewModels.SimulatorViewModel flightDataViewModel, VisualizerViewModel visualizerViewModel)
         {
+            _visualizerViewModel = visualizerViewModel;
             _flightDataViewModel = flightDataViewModel;
             _factory = factory;
             _rnd = rnd;
@@ -53,6 +56,7 @@ namespace AirportFinalProject.Simulator
                 _context.Flights.Add(flight);
                 _context.SaveChanges();
                 _flightDataViewModel.UpdateFlights();
+                _visualizerViewModel.InitializePlanes();
             }
         }
         private string GetCompanyId(ProjectContext context)
@@ -104,8 +108,6 @@ namespace AirportFinalProject.Simulator
                         context.Flights.Remove(flight);
                     }
                 }
-
-
             }
         }
     }

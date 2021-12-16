@@ -13,6 +13,7 @@ namespace AirportFinalProject.Services.FlightCreator
         private readonly ContextFactory _contextFactory;
         public FlightCreator(ContextFactory contextFactory)
         {
+            
             _contextFactory = contextFactory;
         }
         public void CreateFlight(CreateFlightViewModel createViewModel)

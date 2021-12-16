@@ -18,14 +18,14 @@ namespace AirportFinalProject.ViewModels
         public SimulatorViewModel(NavigationService navigationService, Random random)
         {
             _random = random;
-            _simulation = new Simulation(App._factory, _random, this);
+            SeeVisualizer = new NavigateToVisualizerCommand(navigationService, _visualizerViewModel);
+            _visualizerViewModel = new VisualizerViewModel(navigationService);
+            _simulation = new Simulation(App._factory, _random, this, _visualizerViewModel);
             flightViewModels = new ObservableCollection<FlightViewModel>();
             Flights = CollectionViewSource.GetDefaultView(UpdateFlights());
             Flights.SortDescriptions.Add(new SortDescription(nameof(FlightViewModel.FlightDate), ListSortDirection.Ascending));
             Flights.Filter = FilterFlights;
-            _visualizerViewModel = new VisualizerViewModel(navigationService);
             CreateFlight = new NavigationCommand(navigationService);
-            SeeVisualizer = new NavigateToVisualizerCommand(navigationService, _visualizerViewModel);
             CreateRandomFlights = new GenerateRandomFlightCommand(_simulation);
         }
 

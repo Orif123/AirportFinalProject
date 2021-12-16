@@ -8,57 +8,41 @@ namespace AirportFinalProject.VisualizerObjects
 {
     public class BaseVisualObject
     {
-        private Image _objectImage;
-
-        public Image ObjectImage
-        {
-            get { return _objectImage; }
-            set { _objectImage = value; }
-        }
+      
         private double _x;
 
         public double X
         {
             get { return _x; }
-            set { _x = value; Canvas.SetLeft(_objectImage, _x); }
+            set { _x = value;  }
         }
         private double _y;
 
         public double Y
         {
             get { return _y; }
-            set { _y = value; Canvas.SetTop(_objectImage, _y); }
+            set { _y = value; }
         }
+        private double _height;
         public double Height
         {
-            get
-            {
-                return _objectImage.ActualHeight;
-            }
-            set
-            {
-                _objectImage.Height = value;
-            }
+            get { return _height; }
+            set { _height = value; }
         }
+        private double _width;
+
         public double Width
         {
-            get
-            {
-                return _objectImage.ActualWidth;
-            }
-            set
-            {
-                _objectImage.Width = value;
-            }
+            get { return _width; }
+            set { _width = value; }
         }
-        public BaseVisualObject(double x, double y, double height, double width, string imagePath)
+
+        public BaseVisualObject(double x, double y, double height, double width)
         {
-            _objectImage = new Image();
             X = x;
             Y = y;
-            _objectImage.Height = height;
-            _objectImage.Width = width;
-            _objectImage.Source = new BitmapImage(new Uri(imagePath));
+            Height = height;
+            Width = width;
         }
     }
 }

@@ -2,62 +2,59 @@
 using AirportFinalProject.Services.Navigation;
 using AirportFinalProject.VisualizerObjects;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
+using System.Threading;
+using System.Timers;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Threading;
 
 namespace AirportFinalProject.ViewModels
 {
     public class VisualizerViewModel : BaseViewModel
     {
-        public Canvas _canvas;
-        private ObservableCollection<BaseVisualObject> plans;
-        private ObservableCollection<BaseVisualObject> stations;
-        public ICollectionView Plans { get; }
+        private ObservableCollection<VisualPlane> planes;
+        private ObservableCollection<VisualStation> stations;
         public ICollectionView Stations { get; }
         public VisualizerViewModel(NavigationService navigationService)
         {
-            _canvas = new Canvas();
-            plans = new ObservableCollection<BaseVisualObject>();
-            stations = new ObservableCollection<BaseVisualObject>();
+            planes = new ObservableCollection<VisualPlane>();
+            stations = new ObservableCollection<VisualStation>();
+            Stations = CollectionViewSource.GetDefaultView(InitializeStations());
+            Planes = CollectionViewSource.GetDefaultView(InitializePlanes());
         }
-        public void InitializeStations()
+        public ICollectionView Planes { get; set; }
+        public ObservableCollection<VisualStation> InitializeStations()
         {
             using (ProjectContext _context = App._factory.CreateDBContext())
             {
                 var cnvStations = _context.Stations.ToList();
                 foreach (var station in cnvStations)
                 {
-                    var canvasStation = new BaseVisualObject((station.StationId + 1) * 160, 70, 100, 100, station.PhotoPath);
+                    var canvasStation = new VisualStation(station.StationId * 100, 100, 80, 80, station);
                     stations.Add(canvasStation);
-                    _canvas.Children.Add(canvasStation.ObjectImage);
                 }
+                return stations;
             }
         }
-        public void InitializePlans()
+        public ObservableCollection<VisualPlane> InitializePlanes()
         {
             using (ProjectContext _context = App._factory.CreateDBContext())
             {
                 var cnvFlights = _context.Flights.Include(p => p.Company).ToList();
                 foreach (var flight in cnvFlights)
                 {
-                    if (flight.IsDeparture)
+                    var stationPlaced = stations.SingleOrDefault(p => p.StationId == flight.StationId);
+                    var cnvFlight = new VisualPlane(stationPlaced.X, stationPlaced.Y, 30, 30, flight);
+                    planes.Add(cnvFlight);
+                    if (cnvFlight.StationId == 5)
                     {
-                        var cnvFlight = new BaseVisualObject(140, 80, 30, 30, flight.Company.CompanyLogo);
-                        _canvas.Children.Add(cnvFlight.ObjectImage);
-                        plans.Add(cnvFlight);
-                    }
-                    else
-                    {
-                        var cnvFlight = new BaseVisualObject(70, 80, 30, 30, flight.Company.CompanyLogo);
-                        _canvas.Children.Add(cnvFlight.ObjectImage);
-                        plans.Add(cnvFlight);
+                        planes.Remove(cnvFlight);
                     }
                 }
+                return planes;
             }
         }
     }
