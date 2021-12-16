@@ -4,6 +4,7 @@ using AirportFinalProject.Services.Flight.Creator;
 using AirportFinalProject.ViewModels;
 using System;
 using System.Linq;
+using System.Windows.Data;
 using System.Windows.Threading;
 
 namespace AirportFinalProject.Simulator
@@ -57,6 +58,7 @@ namespace AirportFinalProject.Simulator
                 _context.SaveChanges();
                 _flightDataViewModel.UpdateFlights();
                 _visualizerViewModel.InitializePlanes();
+                _visualizerViewModel.Planes.Refresh();
             }
         }
         private string GetCompanyId(ProjectContext context)

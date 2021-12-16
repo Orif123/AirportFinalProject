@@ -18,9 +18,9 @@ namespace AirportFinalProject.ViewModels
         public SimulatorViewModel(NavigationService navigationService, Random random)
         {
             _random = random;
-            SeeVisualizer = new NavigateToVisualizerCommand(navigationService, _visualizerViewModel);
             _visualizerViewModel = new VisualizerViewModel(navigationService);
             _simulation = new Simulation(App._factory, _random, this, _visualizerViewModel);
+            SeeVisualizer = new NavigateToVisualizerCommand(navigationService,_simulation);
             flightViewModels = new ObservableCollection<FlightViewModel>();
             Flights = CollectionViewSource.GetDefaultView(UpdateFlights());
             Flights.SortDescriptions.Add(new SortDescription(nameof(FlightViewModel.FlightDate), ListSortDirection.Ascending));
