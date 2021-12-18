@@ -52,7 +52,7 @@ namespace AirportFinalProject
         }
         private VisualizerViewModel createVisualizer()
         {
-            return new VisualizerViewModel(new NavigationService(_navigationStore, createSimulatorViewModel, createVisualizer));
+            return new VisualizerViewModel(new NavigationService(_navigationStore, createFlightViewModel, createVisualizer));
         }
         
     }

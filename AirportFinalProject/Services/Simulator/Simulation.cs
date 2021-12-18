@@ -15,8 +15,6 @@ namespace AirportFinalProject.Simulator
         private Random _rnd;
         private readonly SimulatorViewModel _flightDataViewModel;
         private readonly VisualizerViewModel _visualizerViewModel;
-
-
         public Simulation(ContextFactory factory, Random rnd, ViewModels.SimulatorViewModel flightDataViewModel, VisualizerViewModel visualizerViewModel)
         {
             _visualizerViewModel = visualizerViewModel;

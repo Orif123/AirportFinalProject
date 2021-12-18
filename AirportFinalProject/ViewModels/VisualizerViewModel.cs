@@ -1,4 +1,5 @@
 ﻿using Airport.Data;
+using AirportFinalProject.Commands;
 using AirportFinalProject.Services.Navigation;
 using AirportFinalProject.VisualizerObjects;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,7 @@ using System.Threading;
 using System.Timers;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Input;
 using System.Windows.Threading;
 
 namespace AirportFinalProject.ViewModels
@@ -18,14 +20,16 @@ namespace AirportFinalProject.ViewModels
         private ObservableCollection<VisualPlane> planes;
         private ObservableCollection<VisualStation> stations;
         public ICollectionView Stations { get; }
+        public ICommand Navigate { get; }
         public VisualizerViewModel(NavigationService navigationService)
         {
             planes = new ObservableCollection<VisualPlane>();
             stations = new ObservableCollection<VisualStation>();
             Stations = CollectionViewSource.GetDefaultView(InitializeStations());
             Planes = CollectionViewSource.GetDefaultView(InitializePlanes());
+            Navigate = new NavigationCommand(navigationService);
         }
-        public ICollectionView Planes { get; set; }
+        public ICollectionView Planes { get; }
         public ObservableCollection<VisualStation> InitializeStations()
         {
             using (ProjectContext _context = App._factory.CreateDBContext())
@@ -49,10 +53,6 @@ namespace AirportFinalProject.ViewModels
                     var stationPlaced = stations.SingleOrDefault(p => p.StationId == flight.StationId);
                     var cnvFlight = new VisualPlane(stationPlaced.X, stationPlaced.Y, 30, 30, flight);
                     planes.Add(cnvFlight);
-                    if (cnvFlight.StationId == 5)
-                    {
-                        planes.Remove(cnvFlight);
-                    }
                 }
                 return planes;
             }

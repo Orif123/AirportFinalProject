@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AirportFinalProject.Migrations
 {
     [DbContext(typeof(ProjectContext))]
-    [Migration("20211215193701_o")]
-    partial class o
+    [Migration("20211218230511_futu")]
+    partial class futu
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
