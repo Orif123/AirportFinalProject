@@ -57,7 +57,6 @@ namespace AirportFinalProject.Simulator
                 EditHistory(_context);
                 _context.SaveChanges();
                 _visualizerViewModel.InitializePlanes();
-                _visualizerViewModel.Planes.Refresh();
                 _flightDataViewModel.UpdateFlights();
             }
         }

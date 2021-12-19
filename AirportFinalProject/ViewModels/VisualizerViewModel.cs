@@ -19,20 +19,23 @@ namespace AirportFinalProject.ViewModels
 {
     public class VisualizerViewModel : BaseViewModel
     {
-        private List<VisualPlane> planes;
+        public Canvas Canvas;
+        private ObservableCollection<VisualPlane> planes;
         private ObservableCollection<VisualStation> stations;
+        public ObservableCollection<VisualPlane> Planes => InitializePlanes();
         public ICollectionView Stations { get; }
         public ICommand Navigate { get; }
         public VisualizerViewModel(NavigationService navigationService)
         {
-            planes = new List<VisualPlane>();
+            Canvas = new Canvas();
+            planes = new ObservableCollection<VisualPlane>();
             stations = new ObservableCollection<VisualStation>();
             Stations = CollectionViewSource.GetDefaultView(InitializeStations());
-            Planes = CollectionViewSource.GetDefaultView(InitializePlanes());
+            //Planes = CollectionViewSource.GetDefaultView(InitializePlanes());
             Navigate = new NavigationCommand(navigationService);
             GetPlanes();
         }
-        public ICollectionView Planes { get; }
+        //public ICollectionView Planes { get; }
         public ObservableCollection<VisualStation> InitializeStations()
         {
             using (ProjectContext _context = App._factory.CreateDBContext())
@@ -59,7 +62,7 @@ namespace AirportFinalProject.ViewModels
             InitializePlanes();
         }
 
-        public List<VisualPlane> InitializePlanes()
+        public ObservableCollection<VisualPlane> InitializePlanes()
         {
             using (ProjectContext _context = App._factory.CreateDBContext())
             {
@@ -70,7 +73,6 @@ namespace AirportFinalProject.ViewModels
                     var stationPlaced = stations.SingleOrDefault(p => p.StationId == flight.StationId);
                     var cnvFlight = new VisualPlane(stationPlaced.X, stationPlaced.Y, 30, 30, flight);
                     planes.Add(cnvFlight);
-                    OnPropertyChanged(nameof(Planes));
                     
                 }
 
