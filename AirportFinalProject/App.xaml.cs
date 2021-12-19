@@ -54,6 +54,7 @@ namespace AirportFinalProject
         {
             return new VisualizerViewModel(new NavigationService(_navigationStore, createFlightViewModel, createVisualizer));
         }
+       
         
     }
 }

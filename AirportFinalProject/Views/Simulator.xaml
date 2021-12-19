@@ -38,7 +38,7 @@
 
         <Button
                 HorizontalAlignment="Left"
-                Command="{Binding CreateRandomFlights, UpdateSourceTrigger=PropertyChanged}"
+                Command="{Binding CreateRandomFlights}"
                 Content="Create Random Flights" Margin="200,78,0,0" Grid.Row="1" />
 
         <ListView ItemsSource="{Binding Flights}">

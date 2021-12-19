@@ -1,5 +1,6 @@
 ﻿using Airport.Data;
 using Airport.Models;
+using AirportFinalProject.Models;
 using AirportFinalProject.Services.Flight.Creator;
 using AirportFinalProject.ViewModels;
 using System;
@@ -15,7 +16,7 @@ namespace AirportFinalProject.Simulator
         private Random _rnd;
         private readonly SimulatorViewModel _flightDataViewModel;
         private readonly VisualizerViewModel _visualizerViewModel;
-        public Simulation(ContextFactory factory, Random rnd, ViewModels.SimulatorViewModel flightDataViewModel, VisualizerViewModel visualizerViewModel)
+        public Simulation(ContextFactory factory, Random rnd, SimulatorViewModel flightDataViewModel, VisualizerViewModel visualizerViewModel)
         {
             _visualizerViewModel = visualizerViewModel;
             _flightDataViewModel = flightDataViewModel;
@@ -24,8 +25,8 @@ namespace AirportFinalProject.Simulator
         }
         public void RandomFlightSimulation()
         {
-            DispatcherTimer dt = new DispatcherTimer();
-            dt.Interval = new TimeSpan(0, 0, 5);
+            DispatcherTimer dt = new DispatcherTimer(DispatcherPriority.Normal);
+            dt.Interval = new TimeSpan(0, 0, 10);
             dt.Tick += Dt_Tick;
             dt.Start();
         }
@@ -53,10 +54,11 @@ namespace AirportFinalProject.Simulator
                 }
                 Progress(_context);
                 _context.Flights.Add(flight);
+                EditHistory(_context);
                 _context.SaveChanges();
-                _flightDataViewModel.UpdateFlights();
                 _visualizerViewModel.InitializePlanes();
                 _visualizerViewModel.Planes.Refresh();
+                _flightDataViewModel.UpdateFlights();
             }
         }
         private string GetCompanyId(ProjectContext context)
@@ -84,20 +86,40 @@ namespace AirportFinalProject.Simulator
             var flightId = Guid.NewGuid().ToString();
             return flightId;
         }
-
+        private void EditHistory(ProjectContext context)
+        {
+            if(context.HistoricalFlights.Count() > 10)
+            {
+                var number = context.HistoricalFlights.Count() - 10;
+                var listToRemove = context.HistoricalFlights.OrderBy(f => f.FlightDate).Take(number);
+                context.HistoricalFlights.RemoveRange(listToRemove);
+            }
+        }
         private void Progress(ProjectContext context)
         {
-            foreach (var flight in context.Flights)
+            foreach (var flight in context.Flights) 
             {
-
                 if (flight.IsDeparture)
                 {
                     ++flight.StationId;
                     if (flight.StationId > 5)
                     {
+                        var hFlight = new FlightHistory()
+                        {
+                            FlightId = flight.FlightId,
+                            FlightDate = flight.FlightDate,
+                            IsDeparture = true,
+                            CompanyId = flight.CompanyId,
+                            FlightNumber = flight.FlightNumber
+                        };
+                        context.HistoricalFlights.Add(hFlight);
                         context.Flights.Remove(flight);
 
                     }
+                }
+                else if (flight.FlightDate > DateTime.Now.AddSeconds(25))
+                {
+                    context.Flights.Remove(flight);
                 }
                 else if (!flight.IsDeparture)
                 {
@@ -105,6 +127,15 @@ namespace AirportFinalProject.Simulator
                     flight.StationId--;
                     if (flight.StationId < 5)
                     {
+                        var hFlight = new FlightHistory()
+                        {
+                            FlightId = flight.FlightId,
+                            FlightDate = flight.FlightDate,
+                            IsDeparture = false,
+                            CompanyId = flight.CompanyId,
+                            FlightNumber = flight.FlightNumber
+                        };
+                        context.HistoricalFlights.Add(hFlight);
                         context.Flights.Remove(flight);
                     }
                 }

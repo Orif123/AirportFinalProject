@@ -1,4 +1,5 @@
 ﻿using Airport.Models;
+using AirportFinalProject.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Airport.Data
@@ -15,6 +16,7 @@ namespace Airport.Data
         public DbSet<Flight> Flights { get; set; }
         public DbSet<Station> Stations { get; set; }
         public DbSet<Company> Companies { get; set; }
+        public DbSet<FlightHistory> HistoricalFlights { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
