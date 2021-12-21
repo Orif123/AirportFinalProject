@@ -1,4 +1,5 @@
 ﻿using Airport.Data;
+using Airport.Models;
 using AirportFinalProject.Commands;
 using AirportFinalProject.Services.Navigation;
 using AirportFinalProject.Simulator;
@@ -23,28 +24,34 @@ namespace AirportFinalProject.ViewModels
         private ObservableCollection<VisualPlane> planes;
         private ObservableCollection<VisualStation> stations;
         public ObservableCollection<VisualPlane> Planes => InitializePlanes();
-        public ICollectionView Stations { get; }
+        public ObservableCollection<VisualStation> Stations => InitializeStations();
         public ICommand Navigate { get; }
         public VisualizerViewModel(NavigationService navigationService)
         {
-            Canvas = new Canvas();
             planes = new ObservableCollection<VisualPlane>();
-            stations = new ObservableCollection<VisualStation>();
-            Stations = CollectionViewSource.GetDefaultView(InitializeStations());
-            //Planes = CollectionViewSource.GetDefaultView(InitializePlanes());
             Navigate = new NavigationCommand(navigationService);
             GetPlanes();
         }
-        //public ICollectionView Planes { get; }
         public ObservableCollection<VisualStation> InitializeStations()
         {
             using (ProjectContext _context = App._factory.CreateDBContext())
             {
                 var cnvStations = _context.Stations.ToList();
-                foreach (var station in cnvStations)
+                for (int i = 0; i < cnvStations.Count(); i++)
                 {
-                    var canvasStation = new VisualStation(station.StationId * 100, 100, 80, 80, station);
-                    stations.Add(canvasStation);
+                    cnvStations[i].StationId = i+1;
+                    stations = new ObservableCollection<VisualStation>()
+                    {
+                        new VisualStation(551, 267, 60, 60, cnvStations[0]),
+                        new VisualStation(438, 173, 60, 60, cnvStations[1]),
+                        new VisualStation(1000, 103, 60, 60, cnvStations[2]),
+                        new VisualStation(455, 68, 60, 60, cnvStations[3]),
+                        new VisualStation(455, 68, 60, 60, cnvStations[4]),
+                        new VisualStation(208, 269, 60, 60, cnvStations[5]),
+                        new VisualStation(166, 98, 60, 60, cnvStations[6]),
+                        new VisualStation(317, 7, 60, 60, cnvStations[7]),
+                        new VisualStation(667, 4, 60, 60, cnvStations[8]),
+                    };
                 }
                 return stations;
             }
@@ -52,7 +59,7 @@ namespace AirportFinalProject.ViewModels
         public void GetPlanes()
         {
             DispatcherTimer dt = new DispatcherTimer();
-            dt.Interval= new System.TimeSpan(0, 0, 10);
+            dt.Interval = new System.TimeSpan(0, 0, 3);
             dt.Tick += Dt_Tick;
             dt.Start();
         }
@@ -70,12 +77,10 @@ namespace AirportFinalProject.ViewModels
                 planes.Clear();
                 foreach (var flight in cnvFlights)
                 {
-                    var stationPlaced = stations.SingleOrDefault(p => p.StationId == flight.StationId);
-                    var cnvFlight = new VisualPlane(stationPlaced.X, stationPlaced.Y, 30, 30, flight);
+                    var stationPlaced = InitializeStations().SingleOrDefault(p => p.StationId == flight.StationId);
+                    var cnvFlight = new VisualPlane(stationPlaced.X, stationPlaced.Y, 60, 60, flight);
                     planes.Add(cnvFlight);
-                    
                 }
-
                 return planes;
             }
         }

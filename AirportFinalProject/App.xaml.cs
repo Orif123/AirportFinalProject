@@ -44,15 +44,19 @@ namespace AirportFinalProject
         }
         private SimulatorViewModel createFlightViewModel()
         {
-            return new SimulatorViewModel( new NavigationService(_navigationStore, createSimulatorViewModel, createVisualizer), _random);
+            return new SimulatorViewModel(new NavigationService(_navigationStore, createSimulatorViewModel, createVisualizer, createHistory), _random);
         }
         private CreateFlightViewModel createSimulatorViewModel()
         {
-            return new CreateFlightViewModel(_creator, new NavigationService (_navigationStore, createFlightViewModel, createVisualizer));
+            return new CreateFlightViewModel(_creator, new NavigationService(_navigationStore, createFlightViewModel, createVisualizer, createHistory));
         }
         private VisualizerViewModel createVisualizer()
         {
-            return new VisualizerViewModel(new NavigationService(_navigationStore, createFlightViewModel, createVisualizer));
+            return new VisualizerViewModel(new NavigationService(_navigationStore, createFlightViewModel, createVisualizer, createHistory));
+        }
+        private HistoryViewModel createHistory()
+        {
+            return new HistoryViewModel(new NavigationService(_navigationStore, createFlightViewModel, createSimulatorViewModel, createVisualizer));
         }
        
         

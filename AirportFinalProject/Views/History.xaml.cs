@@ -1,5 +1,4 @@
-﻿using AirportFinalProject.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -15,23 +14,13 @@ using System.Windows.Shapes;
 namespace AirportFinalProject.Views
 {
     /// <summary>
-    /// Interaction logic for AirportVisualizer.xaml
+    /// Interaction logic for History.xaml
     /// </summary>
-    public partial class AirportVisualizer : UserControl
+    public partial class History : UserControl
     {
-        public AirportVisualizer()
+        public History()
         {
             InitializeComponent();
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        //private void Button_Click(object sender, RoutedEventArgs e)
-        //{
-        //    VisualizerViewModel.
-        //}
     }
 }

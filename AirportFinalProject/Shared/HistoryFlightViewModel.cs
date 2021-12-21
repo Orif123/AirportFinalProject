@@ -1,12 +1,11 @@
-﻿using Airport.Models;
-using System;
+﻿using AirportFinalProject.Models;
 
 namespace AirportFinalProject.ViewModels
 {
-    public class FlightViewModel : BaseViewModel
+    internal class HistoryFlightViewModel : BaseViewModel
     {
-        private readonly Flight _flight;
-        public FlightViewModel(Flight flight)
+        private readonly FlightHistory _flight;
+        public HistoryFlightViewModel(FlightHistory flight)
         {
             _flight = flight;
         }
@@ -15,6 +14,5 @@ namespace AirportFinalProject.ViewModels
         public string FlightDate => _flight.FlightDate.ToString("HH:MM:ss");
         public bool IsDeparture => _flight.IsDeparture;
         public string CompanyName => _flight.Company.CompanyLogo;
-        public  string StationName => _flight.Station.StationName ;
     }
 }

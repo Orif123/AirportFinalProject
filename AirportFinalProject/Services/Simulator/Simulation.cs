@@ -14,23 +14,18 @@ namespace AirportFinalProject.Simulator
     {
         private ContextFactory _factory;
         private Random _rnd;
-        private readonly SimulatorViewModel _flightDataViewModel;
-        private readonly VisualizerViewModel _visualizerViewModel;
-        public Simulation(ContextFactory factory, Random rnd, SimulatorViewModel flightDataViewModel, VisualizerViewModel visualizerViewModel)
+        public Simulation(ContextFactory factory, Random rnd)
         {
-            _visualizerViewModel = visualizerViewModel;
-            _flightDataViewModel = flightDataViewModel;
             _factory = factory;
             _rnd = rnd;
         }
         public void RandomFlightSimulation()
         {
             DispatcherTimer dt = new DispatcherTimer(DispatcherPriority.Normal);
-            dt.Interval = new TimeSpan(0, 0, 10);
+            dt.Interval = new TimeSpan(0, 0, 6);
             dt.Tick += Dt_Tick;
             dt.Start();
         }
-
         private void Dt_Tick(object sender, EventArgs e)
         {
             using (ProjectContext _context = _factory.CreateDBContext())
@@ -56,8 +51,6 @@ namespace AirportFinalProject.Simulator
                 _context.Flights.Add(flight);
                 EditHistory(_context);
                 _context.SaveChanges();
-                _visualizerViewModel.InitializePlanes();
-                _flightDataViewModel.UpdateFlights();
             }
         }
         private string GetCompanyId(ProjectContext context)

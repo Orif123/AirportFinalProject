@@ -61,56 +61,8 @@
                 Grid.Column="0"
                 Margin="0 5 0 0"
                 IsTodayHighlighted="True"
-                
                 SelectedDate="{Binding FlightDate, UpdateSourceTrigger=PropertyChanged}" />
-            <ComboBox Name="hoursComboBox">
-                <ComboBoxItem>00:00</ComboBoxItem>
-                <ComboBoxItem>00:30</ComboBoxItem>
-                <ComboBoxItem>01:00</ComboBoxItem>
-                <ComboBoxItem>01:30</ComboBoxItem>
-                <ComboBoxItem>02:00</ComboBoxItem>
-                <ComboBoxItem>02:30</ComboBoxItem>
-                <ComboBoxItem>03:00</ComboBoxItem>
-                <ComboBoxItem>03:30</ComboBoxItem>
-                <ComboBoxItem>00:00</ComboBoxItem>
-                <ComboBoxItem>00:00</ComboBoxItem>
-                <ComboBoxItem>00:00</ComboBoxItem>
-                <ComboBoxItem>00:00</ComboBoxItem>
-                <ComboBoxItem>00:00</ComboBoxItem>
-                <ComboBoxItem>00:00</ComboBoxItem>
-                <ComboBoxItem>00:00</ComboBoxItem>
-                <ComboBoxItem>00:00</ComboBoxItem>
-                <ComboBoxItem>00:00</ComboBoxItem>
-                <ComboBoxItem>00:00</ComboBoxItem>
-                <ComboBoxItem>00:00</ComboBoxItem>
-                <ComboBoxItem>00:00</ComboBoxItem>
-                <ComboBoxItem>00:00</ComboBoxItem>
-                <ComboBoxItem>00:00</ComboBoxItem>
-                <ComboBoxItem>00:00</ComboBoxItem>
-                <ComboBoxItem>00:00</ComboBoxItem>
-                <ComboBoxItem>00:00</ComboBoxItem>
-                <ComboBoxItem>00:00</ComboBoxItem>
-                <ComboBoxItem>00:00</ComboBoxItem>
-                <ComboBoxItem>00:00</ComboBoxItem>
-                <ComboBoxItem>00:00</ComboBoxItem>
-                <ComboBoxItem>00:00</ComboBoxItem>
-                <ComboBoxItem>00:00</ComboBoxItem>
-                <ComboBoxItem>00:00</ComboBoxItem>
-                <ComboBoxItem>00:00</ComboBoxItem>
-                <ComboBoxItem>00:00</ComboBoxItem>
-                <ComboBoxItem>00:00</ComboBoxItem>
-                <ComboBoxItem>00:00</ComboBoxItem>
-                <ComboBoxItem>00:00</ComboBoxItem>
-                <ComboBoxItem>00:00</ComboBoxItem>
-                <ComboBoxItem>00:00</ComboBoxItem>
-                <ComboBoxItem>00:00</ComboBoxItem>
-                <ComboBoxItem>00:00</ComboBoxItem>
-                <ComboBoxItem>00:00</ComboBoxItem>
-                <ComboBoxItem>00:00</ComboBoxItem>
-                <ComboBoxItem>00:00</ComboBoxItem>
-                <ComboBoxItem>00:00</ComboBoxItem>
-                <ComboBoxItem>00:00</ComboBoxItem>
-            </ComboBox>
+            
             <Button Command="{Binding Submit}" Content="Submit" />
             <Button Command="{Binding FlightData}" Content="Go Back" Grid.Column="1" Margin="160,0,-262,35" Grid.RowSpan="2" />
         </Grid>

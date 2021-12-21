@@ -17,7 +17,6 @@ namespace AirportFinalProject.Commands
         public GenerateRandomFlightCommand(ISimulation simulation)
         {
             _simulation = simulation;
-           
         }
         public override void Execute(object parameter)
         {

@@ -8,6 +8,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Data;
 using System.Windows.Input;
+using System.Windows.Threading;
 
 namespace AirportFinalProject.ViewModels
 {
@@ -19,14 +20,16 @@ namespace AirportFinalProject.ViewModels
         {
             _random = random;
             _visualizerViewModel = new VisualizerViewModel(navigationService);
-            _simulation = new Simulation(App._factory, _random, this, _visualizerViewModel);
-            SeeVisualizer = new NavigateToVisualizerCommand(navigationService,_simulation);
+            _simulation = new Simulation(App._factory, _random);
+            SeeVisualizer = new NavigateToVisualizerCommand(navigationService);
+            SeeHistory = new SeeHistoryCommand(navigationService);
             flightViewModels = new ObservableCollection<FlightViewModel>();
             Flights = CollectionViewSource.GetDefaultView(UpdateFlights());
             Flights.SortDescriptions.Add(new SortDescription(nameof(FlightViewModel.FlightDate), ListSortDirection.Ascending));
             Flights.Filter = FilterFlights;
             CreateFlight = new NavigationCommand(navigationService);
             CreateRandomFlights = new GenerateRandomFlightCommand(_simulation);
+            GetFlights();
         }
 
         private Random _random;
@@ -48,7 +51,19 @@ namespace AirportFinalProject.ViewModels
         public ICommand CreateFlight { get; }
         public ICommand CreateRandomFlights { get; }
         public ICommand SeeVisualizer { get; }
-       
+        public ICommand SeeHistory { get; }
+       public void GetFlights()
+        {
+            DispatcherTimer dt = new DispatcherTimer();
+            dt.Interval = new TimeSpan(0, 0, 3);
+            dt.Tick += Dt_Tick;
+            dt.Start();
+        }
+
+        private void Dt_Tick(object sender, EventArgs e)
+        {
+            UpdateFlights();
+        }
 
         public ObservableCollection<FlightViewModel> UpdateFlights()
         {
