@@ -12,7 +12,8 @@ namespace AirportFinalProject.ViewModels
         }
         public string FlightId => _flight.FlightId;
         public string FlightNumber => _flight.FlightNumber;
-        public string FlightDate => _flight.FlightDate.ToString("HH:MM:ss");
+        public DateTime FlightDate => _flight.FlightDate;
+        public string WrittenFlightDate => _flight.FlightDate.ToString("HH:MM:ss");
         public bool IsDeparture => _flight.IsDeparture;
         public string CompanyName => _flight.Company.CompanyLogo;
         public  string StationName => _flight.Station.StationName ;

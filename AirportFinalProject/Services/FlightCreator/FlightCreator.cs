@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
+using System.Windows;
 
 namespace AirportFinalProject.Services.FlightCreator
 {
@@ -13,9 +15,11 @@ namespace AirportFinalProject.Services.FlightCreator
         private readonly ContextFactory _contextFactory;
         public FlightCreator(ContextFactory contextFactory)
         {
-            
+
             _contextFactory = contextFactory;
         }
+
+
         public void CreateFlight(CreateFlightViewModel createViewModel)
         {
             using (ProjectContext _context = _contextFactory.CreateDBContext())
@@ -27,21 +31,28 @@ namespace AirportFinalProject.Services.FlightCreator
                     FlightId = Guid.NewGuid().ToString(),
                     CompanyId = createViewModel.CompanyId,
                     IsDeparture = createViewModel.IsDeparture,
-                    FlightDate = createViewModel.FlightDate
+                    FlightDate = DateTime.Now
                 };
                 flight.FlightNumber = GetFlyNumber(_context, flight.FlightId, flight.CompanyId);
-                if (flight.IsDeparture)
+                foreach (var Flight in _context.Flights)
                 {
-                    flight.StationId = 1;
-
+                    if (flight.IsDeparture && Flight.StationId != 1)
+                    {
+                        flight.StationId = 1;
+                        _context.Flights.Add(flight);
+                    }
+                    else if (!flight.IsDeparture && Flight.StationId != 8)
+                    {
+                        flight.StationId = 8;
+                        _context.Flights.Add(flight);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Enabled To Add Flight Right Now");
+                    }
                 }
-                else if (!flight.IsDeparture)
-                {
-                    flight.StationId = 9;
-                }
-
-                _context.Flights.Add(flight);
                 _context.SaveChanges();
+
             }
         }
         private string GetFlyNumber(ProjectContext context, string flightId, string companyId)

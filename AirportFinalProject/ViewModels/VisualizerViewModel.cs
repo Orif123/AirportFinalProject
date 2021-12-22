@@ -1,18 +1,11 @@
 ﻿using Airport.Data;
-using Airport.Models;
 using AirportFinalProject.Commands;
 using AirportFinalProject.Services.Navigation;
-using AirportFinalProject.Simulator;
 using AirportFinalProject.VisualizerObjects;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
-using System.Threading;
-using System.Timers;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Threading;
 
@@ -49,8 +42,7 @@ namespace AirportFinalProject.ViewModels
                         new VisualStation(455, 68, 60, 60, cnvStations[4]),
                         new VisualStation(208, 269, 60, 60, cnvStations[5]),
                         new VisualStation(166, 98, 60, 60, cnvStations[6]),
-                        new VisualStation(317, 7, 60, 60, cnvStations[7]),
-                        new VisualStation(667, 4, 60, 60, cnvStations[8]),
+                        new VisualStation(317, 7, 60, 60, cnvStations[7])
                     };
                 }
                 return stations;

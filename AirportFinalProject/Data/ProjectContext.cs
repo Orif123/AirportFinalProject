@@ -54,8 +54,7 @@ namespace Airport.Data
                 new Station { StationId = 5, StationName = "Done", PhotoPath = "C:/Users/ZEN/source/repos/AirportFinalProject/AirportFinalProject/Assets/Iberia.jfif" },
                 new Station { StationId = 6, StationName = "Landing", PhotoPath = "C:/Users/ZEN/source/repos/AirportFinalProject/AirportFinalProject/Assets/Iberia.jfif" },
                 new Station { StationId = 7, StationName = "About to land", PhotoPath = "C:/Users/ZEN/source/repos/AirportFinalProject/AirportFinalProject/Assets/Iberia.jfif" },
-                new Station { StationId = 8, StationName = "preparing to land", PhotoPath = "C:/Users/ZEN/source/repos/AirportFinalProject/AirportFinalProject/Assets/Iberia.jfif" },
-                new Station { StationId = 9, StationName = "On Air", PhotoPath = "C:/Users/ZEN/source/repos/AirportFinalProject/AirportFinalProject/Assets/Iberia.jfif" }
+                new Station { StationId = 8, StationName = "preparing to land", PhotoPath = "C:/Users/ZEN/source/repos/AirportFinalProject/AirportFinalProject/Assets/Iberia.jfif" }
                 );
         }
 

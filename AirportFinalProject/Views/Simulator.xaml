@@ -49,16 +49,16 @@
 
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Flight Number">
+                    <GridViewColumn Header="Flight Date">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock HorizontalAlignment="Center" Text="{Binding FlightDate}" />
+                                <TextBlock HorizontalAlignment="Center" Text="{Binding WrittenFlightDate}" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
 
 
-                    <GridViewColumn Header="Flight Date">
+                    <GridViewColumn Header="Flight Number">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Padding="0 0 20 0" Text="{Binding FlightNumber}" />

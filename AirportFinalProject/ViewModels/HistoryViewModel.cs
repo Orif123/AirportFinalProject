@@ -23,7 +23,7 @@ namespace AirportFinalProject.ViewModels
             _navigationService = navigationService;
             history = new ObservableCollection<HistoryFlightViewModel>();
             History = CollectionViewSource.GetDefaultView(UpdateHistory());
-            History.SortDescriptions.Add(new SortDescription(nameof(FlightViewModel.FlightDate), ListSortDirection.Ascending));
+            History.SortDescriptions.Add(new SortDescription(nameof(HistoryFlightViewModel.FlightDate), ListSortDirection.Descending));
             Navigate = new NavigationCommand(_navigationService);
             GetHistory();
         }

@@ -5,6 +5,7 @@ using AirportFinalProject.Services.Flight.Creator;
 using AirportFinalProject.ViewModels;
 using System;
 using System.Linq;
+using System.Threading;
 using System.Windows.Data;
 using System.Windows.Threading;
 
@@ -45,7 +46,7 @@ namespace AirportFinalProject.Simulator
                 }
                 else if (!flight.IsDeparture)
                 {
-                    flight.StationId = 9;
+                    flight.StationId = 8;
                 }
                 Progress(_context);
                 _context.Flights.Add(flight);
@@ -80,21 +81,21 @@ namespace AirportFinalProject.Simulator
         }
         private void EditHistory(ProjectContext context)
         {
-            if(context.HistoricalFlights.Count() > 10)
+            if (context.HistoricalFlights.Count() > 10)
             {
-                var number = context.HistoricalFlights.Count() - 10;
+                var number = context.HistoricalFlights.Count() - 11;
                 var listToRemove = context.HistoricalFlights.OrderBy(f => f.FlightDate).Take(number);
                 context.HistoricalFlights.RemoveRange(listToRemove);
             }
         }
         private void Progress(ProjectContext context)
         {
-            foreach (var flight in context.Flights) 
+            foreach (var flight in context.Flights)
             {
                 if (flight.IsDeparture)
                 {
-                    ++flight.StationId;
-                    if (flight.StationId > 5)
+                    flight.StationId++;
+                    if (flight.StationId == 4)
                     {
                         var hFlight = new FlightHistory()
                         {
@@ -115,9 +116,8 @@ namespace AirportFinalProject.Simulator
                 }
                 else if (!flight.IsDeparture)
                 {
-
                     flight.StationId--;
-                    if (flight.StationId < 5)
+                    if (flight.StationId == 5)
                     {
                         var hFlight = new FlightHistory()
                         {

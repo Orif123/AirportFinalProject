@@ -49,7 +49,7 @@
         <Button
                 HorizontalAlignment="Left"
                 Command="{Binding Navigate}"
-                Content="Back" Margin="730,404,0,2" Width="70" Click="Button_Click" RenderTransformOrigin="2.403,-0.079" >
+                Content="Back" Margin="730,388,0,2" Width="70" Click="Button_Click" RenderTransformOrigin="2.403,-0.079" >
             <Button.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
