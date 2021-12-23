@@ -15,11 +15,9 @@ namespace AirportFinalProject.ViewModels
     public class SimulatorViewModel : BaseViewModel
     {
         private readonly ISimulation _simulation;
-        private readonly VisualizerViewModel _visualizerViewModel;
         public SimulatorViewModel(NavigationService navigationService, Random random)
         {
             _random = random;
-            _visualizerViewModel = new VisualizerViewModel(navigationService);
             _simulation = new Simulation(App._factory, _random);
             SeeVisualizer = new NavigateToVisualizerCommand(navigationService);
             SeeHistory = new SeeHistoryCommand(navigationService);

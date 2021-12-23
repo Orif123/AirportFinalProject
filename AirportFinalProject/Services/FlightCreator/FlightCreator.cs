@@ -24,8 +24,6 @@ namespace AirportFinalProject.Services.FlightCreator
         {
             using (ProjectContext _context = _contextFactory.CreateDBContext())
             {
-
-                Random _rnd = new Random();
                 var flight = new Airport.Models.Flight()
                 {
                     FlightId = Guid.NewGuid().ToString(),
@@ -36,19 +34,20 @@ namespace AirportFinalProject.Services.FlightCreator
                 flight.FlightNumber = GetFlyNumber(_context, flight.FlightId, flight.CompanyId);
                 foreach (var Flight in _context.Flights)
                 {
-                    if (flight.IsDeparture && Flight.StationId != 1)
+                    if (Flight.StationId == 8 || Flight.StationId == 1)
+                    {
+                        MessageBox.Show("Cant Add");
+                        _context.Flights.Remove(flight);
+                    }
+                    if (flight.IsDeparture && Flight.StationId != 1 && Flight.StationId !=8)
                     {
                         flight.StationId = 1;
                         _context.Flights.Add(flight);
                     }
-                    else if (!flight.IsDeparture && Flight.StationId != 8)
+                    else if (!flight.IsDeparture && Flight.StationId != 8 && Flight.StationId != 1)
                     {
                         flight.StationId = 8;
                         _context.Flights.Add(flight);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Enabled To Add Flight Right Now");
                     }
                 }
                 _context.SaveChanges();

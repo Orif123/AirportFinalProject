@@ -35,14 +35,14 @@ namespace AirportFinalProject.ViewModels
                     cnvStations[i].StationId = i+1;
                     stations = new ObservableCollection<VisualStation>()
                     {
-                        new VisualStation(551, 267, 60, 60, cnvStations[0]),
-                        new VisualStation(438, 173, 60, 60, cnvStations[1]),
-                        new VisualStation(1000, 103, 60, 60, cnvStations[2]),
-                        new VisualStation(455, 68, 60, 60, cnvStations[3]),
-                        new VisualStation(455, 68, 60, 60, cnvStations[4]),
-                        new VisualStation(208, 269, 60, 60, cnvStations[5]),
-                        new VisualStation(166, 98, 60, 60, cnvStations[6]),
-                        new VisualStation(317, 7, 60, 60, cnvStations[7])
+                        new VisualStation(1000, 100, 60, 60, cnvStations[0]),
+                        new VisualStation(1000, 200, 60, 60, cnvStations[1]),
+                        new VisualStation(1000, 300, 60, 60, cnvStations[2]),
+                        new VisualStation(1000, 400, 60, 60, cnvStations[3]),
+                        new VisualStation(208, 100, 60, 60, cnvStations[4]),
+                        new VisualStation(208, 200, 60, 60, cnvStations[5]),
+                        new VisualStation(208, 300, 60, 60, cnvStations[6]),
+                        new VisualStation(208, 400, 60, 60, cnvStations[7])
                     };
                 }
                 return stations;

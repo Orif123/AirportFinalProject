@@ -2,11 +2,8 @@
 using Airport.Models;
 using AirportFinalProject.Models;
 using AirportFinalProject.Services.Flight.Creator;
-using AirportFinalProject.ViewModels;
 using System;
 using System.Linq;
-using System.Threading;
-using System.Windows.Data;
 using System.Windows.Threading;
 
 namespace AirportFinalProject.Simulator
@@ -25,7 +22,14 @@ namespace AirportFinalProject.Simulator
             DispatcherTimer dt = new DispatcherTimer(DispatcherPriority.Normal);
             dt.Interval = new TimeSpan(0, 0, 6);
             dt.Tick += Dt_Tick;
-            dt.Start();
+            if (dt.IsEnabled)
+            {
+                dt.Stop();
+            }
+            else
+            {
+                dt.Start();
+            }
         }
         private void Dt_Tick(object sender, EventArgs e)
         {
@@ -117,7 +121,7 @@ namespace AirportFinalProject.Simulator
                 else if (!flight.IsDeparture)
                 {
                     flight.StationId--;
-                    if (flight.StationId == 5)
+                    if (flight.StationId <= 5)
                     {
                         var hFlight = new FlightHistory()
                         {

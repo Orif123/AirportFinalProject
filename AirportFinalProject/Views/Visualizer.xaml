@@ -21,14 +21,12 @@
             </ItemsControl.ItemContainerStyle>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Image Source="{Binding ImagePath}" Height="{Binding Height}" Width="{Binding Width}"/>
+                    <Image Source="{Binding ImagePath}" Height="{Binding Height}" Width="{Binding Width}"  Panel.ZIndex="1"/>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
-        <ItemsControl x:Name="ori" ItemsSource="{Binding Path=Planes , UpdateSourceTrigger=PropertyChanged}" Margin="-1,0,0,0">
-            <ItemsControl.Background>
-                <ImageBrush ImageSource="C:\Users\ZEN\source\repos\AirportFinalProject\AirportFinalProject\Assets\Aircraft.png"></ImageBrush>
-            </ItemsControl.Background>
+        <ItemsControl  ItemsSource="{Binding Path=Planes , UpdateSourceTrigger=PropertyChanged}" Margin="-1,0,0,0">
+            
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <Canvas/>
@@ -49,15 +47,7 @@
         <Button
                 HorizontalAlignment="Left"
                 Command="{Binding Navigate}"
-                Content="Back" Margin="730,388,0,2" Width="70" Click="Button_Click" RenderTransformOrigin="2.403,-0.079" >
-            <Button.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform AngleY="-1.132"/>
-                    <RotateTransform/>
-                    <TranslateTransform Y="-1.939"/>
-                </TransformGroup>
-            </Button.RenderTransform>
+                Content="Back" Margin="384,387,0,3" Width="70" Click="Button_Click" Height="100" >
         </Button>
     </Grid>
 </UserControl>

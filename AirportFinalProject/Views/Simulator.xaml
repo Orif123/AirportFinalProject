@@ -24,12 +24,8 @@
         </Grid>
         <Button
                 HorizontalAlignment="Left"
-                Command="{Binding CreateFlight}"
-                Content="Create New Flight" Margin="451,78,0,0" Grid.Row="1" RenderTransformOrigin="1.11,0.578" />
-        <Button
-                HorizontalAlignment="Left"
                 Command="{Binding SeeHistory}"
-                Content="See History" Margin="47,78,0,0" Grid.Row="1" RenderTransformOrigin="1.11,0.578" />
+                Content="See History" Margin="451,78,0,0" Grid.Row="1" RenderTransformOrigin="1.11,0.578" />
         <Button
                 HorizontalAlignment="Left"
                 Command="{Binding SeeVisualizer}"

@@ -7,13 +7,9 @@ using AirportFinalProject.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Windows;
-using System.Windows.Controls;
 
 namespace AirportFinalProject
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
     public partial class App : Application
     {
         private const string CONNECTION_STRING = "Server=DESKTOP-EKQUKID;Database=AirportData;Trusted_Connection=True;";
@@ -34,7 +30,7 @@ namespace AirportFinalProject
             base.OnStartup(e);
             DbContextOptions options = new DbContextOptionsBuilder().UseSqlServer("Server=DESKTOP-EKQUKID;Database=AirportData;Trusted_Connection=True;").Options;
             _context = new ProjectContext(options);
-            _navigationStore.BaseViewModel = createSimulatorViewModel();
+            _navigationStore.BaseViewModel = createFlightViewModel();
             _context.Database.Migrate();
             MainWindow = new MainWindow()
             {
